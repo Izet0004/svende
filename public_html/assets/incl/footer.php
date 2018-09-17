@@ -1,21 +1,13 @@
-<footer class="row mx-auto">
-    <div class="col-lg-7 bg-green p-3">
-        <h5 class="weight-1000">VANDRESTØVLEN</h5>
-        <p class="m-0">Bjergstien 6 - 8000 Århus C</p>
-        <p class="m-0">Tlf: 86 13 15 89</p>
-        <p class="p-0">info@vandrestoevlen.dk</p>
-    </div>
-    <div class="col-lg-5 text-center form-inline bg-black p-20">
-        <h4 class="white weight-1000">TILMELD NYHEDSBREV</h4>
-        <div class="form-group">
-            <input type="text" class="form-control input-fix" name="" id="emailInput" aria-describedby="helpId" placeholder="DIN EMAIL">
-        </div>
-        <div class="form-group">
-            <button name="" id="" class="btn btn-primary btn-green weight-1000 " onclick="newsletterSignup(this)" role="button">TILMELD</button>
+<footer class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 follow-us">
+            <h4 class="font-62 white">FØLG OS</h4>
+            <div>
+                <a href="#"><img src="assets/images/fb-logo.png" alt="fblogo"></a>
+                <a href="#"><img src="assets/images/twitter-logo.png" alt="twitterlogo"></a>
+            </div>
         </div>
     </div>
-
-
 </footer>
 <div id="toaster">
 </div>
