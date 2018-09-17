@@ -4,10 +4,28 @@ body {
     position: relative;
 }
 
+header {
+    background-color: #fff;
+    position: relative;
+    z-index: 10000;
+    -webkit-box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.2);
+}
+
+header .navbar-collapse {
+    margin-top: 2em;
+}
+
+header .bg-light {
+    background-color: #ffffff !important;
+
+}
+
 /* COLORS */
 
 .red {
-    color: red;
+    color: #a33a49;
 }
 
 .white {
@@ -20,6 +38,12 @@ body {
 
 .bg-black {
     background-color: #000;
+}
+
+/* EXTRAS */
+.full-img{
+    width: 100%;
+    height: auto;
 }
 
 /* TOASTER */
