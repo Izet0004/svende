@@ -93,6 +93,34 @@ header .bg-light {
     background-color: #a33a49;
 }
 
+/* PROGRAM */
+.program ul {
+    padding: 0;
+    background-color: #282828;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.program ul li {
+    padding: 1em;
+}
+.program-info tr{
+    background-color: #e8e8e8;
+}
+
+.program-info tr:hover{
+    background-color: #aeaeae;
+}
+.program-info-heading{
+    text-align: center;
+    padding: 1em;
+    margin-bottom: 0;
+}
+/* #region */
 /* FOOTER */
 .follow-us {
     background-color: #121212;
@@ -162,9 +190,9 @@ header .bg-light {
     left: 50%;
     top: -20%;
 }
-
+/* #endregion */
 /* COLORS */
-
+/* #region */
 .red {
     color: #a33a49;
 }
@@ -173,14 +201,38 @@ header .bg-light {
     color: white !important;
 }
 
+.bg-red{
+    background-color: #a33a49;
+}
 .bg-green {
-    background-color: #80a451;
+    background-color: #6b8846;
 }
 
+.bg-purple{
+    background-color: #80347c;
+}
+.bg-blue{
+    background-color: #396999;
+}
 .bg-black {
     background-color: #000;
 }
-
+.border-top-bot-red td, .border-top-bot-red th{
+    border-top: 1px solid #a33a49 !important;
+    border-bottom: 1px solid #a33a49 !important;
+}
+.border-top-bot-blue td, .border-top-bot-blue th{
+    border-top: 1px solid #396999 !important;
+    border-bottom: 1px solid #396999 !important;
+}
+.border-top-bot-green td, .border-top-bot-green th{
+    border-top: 1px solid #6b8846 !important;
+    border-bottom: 1px solid #6b8846 !important;
+}
+.border-top-bot-purple td, .border-top-bot-purple th{
+    border-top: 1px solid #80347c !important;
+    border-bottom: 1px solid #80347c !important;
+}
 /* HOVERS */
 .hover-red:hover {
     background-color: #a33a49
@@ -197,17 +249,30 @@ header .bg-light {
 .hover-green:hover {
     background-color: #6b8846;
 }
-
+/* #endregion */
 /* EXTRAS */
+
+/* #region */
 .pad-right {
     padding-right: 1em;
 }
-
+.pad-sides{
+    padding-left: 2em !important;
+    padding-right: 2em !important;
+}
+.vert-middle{
+    vertical-align: middle !important;
+}
+.full-width{
+    width: 100%;
+}
 .full-img {
     width: 100%;
     height: auto;
 }
-
+.block{
+    display: block;
+}
 .darken {
     filter: brightness(50%);
 }
@@ -249,11 +314,23 @@ header .bg-light {
 .font-62 {
     font-size: 62px;
 }
-
+.font-36{
+    font-size: 36px;
+}
+.font-32{
+    font-size: 32px;
+}
+.font-14{
+    font-size: 14px;
+}
+/* #endregion */
 /* MEDIA */
 @media screen and (max-width: 990px) {
     .font-62 {
         font-size: 32px;
+    }
+    .font-36{
+        font-size: 18px;
     }
 }
 
