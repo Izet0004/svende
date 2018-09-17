@@ -12,10 +12,12 @@ header {
     -moz-box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.2);
 }
-header .navbar-light .navbar-nav .nav-link{
+
+header .navbar-light .navbar-nav .nav-link {
     color: #000;
 }
-header .buy-ticket{
+
+header .buy-ticket {
     background-color: #a33a49;
     padding: 0.5em 2em !important;
 }
@@ -36,20 +38,24 @@ header .bg-light {
     padding: 1em;
     background-color: #f3f3f3;
 }
-.news a{
+
+.news a {
     position: relative;
 }
-.news a:hover{
+
+.news a:hover {
     background-color: #3a6296;
     text-decoration: none;
     color: #fff;
 }
-.news a:hover::after{
+
+.news a:hover::after {
     content: '>';
     position: absolute;
     font-weight: 900;
     right: 10px;
 }
+
 .newsarchieve {
     background-color: #3a6296;
     /* max-width: 90%; */
@@ -63,6 +69,29 @@ header .bg-light {
     margin: 1em auto;
 }
 
+/* LINE UP */
+
+.line-up ul {
+    background-color: #282828;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.line-up ul li {
+    padding: 1em;
+}
+
+.line-up-bands figcaption {
+    padding: 0.1em 0.5em;
+    text-shadow: 0 2px 6px rgba(0,0,0,1);
+    color: #fff;
+    font-size: 26px;
+    background-color: #a33a49;
+}
 
 /* FOOTER */
 .follow-us {
@@ -120,17 +149,20 @@ header .bg-light {
     padding: 0.3em;
     text-align: center;
 }
-.hancock{
+
+.hancock {
     position: relative;
     padding: 10em 5em;
     background-color: #090909;
 }
-.hancock img{
+
+.hancock img {
     position: absolute;
     transform: translate(-50%, 0);
     left: 50%;
     top: -20%;
 }
+
 /* COLORS */
 
 .red {
@@ -149,10 +181,28 @@ header .bg-light {
     background-color: #000;
 }
 
+/* HOVERS */
+.hover-red:hover {
+    background-color: #a33a49
+}
+
+.hover-purple:hover {
+    background-color: #80347c
+}
+
+.hover-blue:hover {
+    background-color: #396999;
+}
+
+.hover-green:hover {
+    background-color: #6b8846;
+}
+
 /* EXTRAS */
-.pad-right{
+.pad-right {
     padding-right: 1em;
 }
+
 .full-img {
     width: 100%;
     height: auto;
@@ -166,9 +216,10 @@ header .bg-light {
     color: white;
     text-decoration: none;
 }
-.a-remove:hover{
+
+.a-remove:hover {
     text-decoration: none;
-    
+    color: white;
 }
 
 .blur {

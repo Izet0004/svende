@@ -19,8 +19,9 @@ require("assets/incl/header.php");
             <img src="assets/images/art1.jpg" alt="art" class="full-img">
             <div>
                 <h4>SPILD AF TID PÅ INDIANSK</h4>
-                <p class="blur">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea quas doloremque esse magnam ex fugiat
-                    perferendis earum laboriosam  riosam eveniet minus quasi eveniet minus quasi la</p>
+                <p class="blur">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea quas doloremque esse
+                    magnam ex fugiat
+                    perferendis earum laboriosam riosam eveniet minus quasi eveniet minus quasi la</p>
                 <a class="btn-a-black text-center" href="#">LÆS MERE</a>
             </div>
         </div>
@@ -28,8 +29,9 @@ require("assets/incl/header.php");
             <img src="assets/images/art1.jpg" alt="art" class="full-img">
             <div>
                 <h4>SPILD AF TID PÅ INDIANSK</h4>
-                <p class="blur">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea quas doloremque esse magnam ex fugiat
-                    perferendis earum laboriosam  riosam eveniet minus quasi eveniet minus quasi la</p>
+                <p class="blur">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea quas doloremque esse
+                    magnam ex fugiat
+                    perferendis earum laboriosam riosam eveniet minus quasi eveniet minus quasi la</p>
                 <a class="btn-a-black text-center" href="#">LÆS MERE</a>
             </div>
         </div>
@@ -37,8 +39,9 @@ require("assets/incl/header.php");
             <img src="assets/images/art1.jpg" alt="art" class="full-img">
             <div>
                 <h4>SPILD AF TID PÅ INDIANSK</h4>
-                <p class="blur">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea quas doloremque esse magnam ex fugiat
-                    perferendis earum laboriosam  riosam eveniet minus quasi eveniet minus quasi la</p>
+                <p class="blur">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea quas doloremque esse
+                    magnam ex fugiat
+                    perferendis earum laboriosam riosam eveniet minus quasi eveniet minus quasi la</p>
                 <a class="btn-a-black text-center" href="#">LÆS MERE</a>
             </div>
         </div>

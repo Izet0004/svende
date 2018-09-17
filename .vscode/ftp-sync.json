@@ -1,0 +1,24 @@
+{
+    "remotePath": "./_www1_apache",
+    "host": "ftp.techcollege.dk",
+    "username": "ftp.techcollege.dk|SKOLE\\izet0004",
+    "password": "suq47gzq",
+    "port": 21001,
+    "secure": false,
+    "protocol": "ftp",
+    "uploadOnSave": true,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": null,
+    "passphrase": null,
+    "ignore": [
+        "\\.vscode",
+        "\\.git",
+        "\\.DS_Store"
+    ],
+    "generatedFiles": {
+        "uploadOnSave": false,
+        "extensionsToInclude": [],
+        "path": ""
+    }
+}
