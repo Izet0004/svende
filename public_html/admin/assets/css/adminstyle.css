@@ -1,0 +1,156 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #eee;
+    /* position: relative; */
+}
+
+header {
+    background-color: #343a40;
+}
+
+header .navbar-brand::first-letter {
+    color: #32cd32;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-brand:first footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.dash-info {
+    margin-top: 2em;
+}
+
+.dash-info div div {
+    background-color: #bbb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+/* MODAL */
+.modalContainer {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.customModal {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: auto;
+    height: 80vh;
+    width: 80vw;
+    margin: 0em auto;
+    background-color: #fff;
+}
+
+#modalHeading {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 30%;
+    color: #fff;
+    justify-content: left;
+    padding: 1em;
+    margin-bottom: 2em;
+    background-color: #343a40;
+    max-height: 100px;
+}
+
+#modalBody {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 16px;
+    padding: 0em 24px;
+    width: 100%;
+}
+
+#modalFooter {
+    padding: 1em;
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    max-height: 200px;
+    background-color: #343a40;
+}
+
+#modalFooter button {
+    margin: 0 0.2em;
+}
+
+.btn-green {
+    background-color: #32cd32;
+    outline: none;
+    border: none;
+}
+
+.btn-green:hover {
+    background-color: #32cd10;
+}
+
+.btn-dark {
+    background-color: #424548;
+    outline: none;
+    border: none;
+}
+
+.btn-red:hover {
+    background-color: #ccc;
+}
+
+.customModal ul {
+    list-style: none;
+}
+
+.material-icons {
+    cursor: pointer;
+}
+
+#loader {
+    overflow: hidden;
+    border: 6px solid #000;
+    border-top: 6px solid #32cd32;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: 1em auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
