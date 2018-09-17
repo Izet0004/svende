@@ -8,6 +8,21 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-12 newsletter">
+            <p class="font-62 white">TILMELD NYHEDSBREV</p>
+            <p class="white">Få seneste nyt sendt direkte til din indbakke</p>
+            <div>
+                <input type="text" placeholder="INDTAST DIN E-MAIL" name="newsletter" id="">
+                <a href="#" class="a-remove">TILMELD NYHEDSBREV</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 hancock">
+            <img src="assets/images/hancock.png" alt="hancock">
+        </div>
+    </div>
 </footer>
 <div id="toaster">
 </div>

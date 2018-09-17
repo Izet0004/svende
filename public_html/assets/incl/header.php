@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
 </head>
 
@@ -31,8 +33,8 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNavDropdown">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">KØB BILLET</a>
+                    <li class="nav-item active pad-right">
+                        <a class="nav-link buy-ticket a-remove white" href="#">KØB BILLET</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">NYHEDER</a>
@@ -50,9 +52,11 @@
                         <a class="nav-link" href="#">LOGIN</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">X</a>
+                        <a class="nav-link" href="#"><i class="material-icons">
+                                search
+                            </i></a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             Dropdown link
@@ -62,7 +66,7 @@
                             <a class="dropdown-item" href="#">Another action</a>
                             <a class="dropdown-item" href="#">Something else here</a>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </nav>
