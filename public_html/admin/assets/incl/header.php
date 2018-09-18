@@ -43,6 +43,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="users.php">Users</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.php">Nyheder</a>
+                    </li>
                 </ul>
             </div>
         </nav>

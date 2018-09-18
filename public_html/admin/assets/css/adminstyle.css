@@ -5,6 +5,19 @@ body {
     /* position: relative; */
 }
 
+body * {
+    list-style: none;
+    text-decoration: none;
+}
+
+.create-button {
+    margin: 1em 0em;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
 header {
     background-color: #343a40;
 }
@@ -23,6 +36,12 @@ header .navbar-brand::first-letter {
     bottom: 0;
 }
 
+.a-fix{
+    color: black;
+}
+.a-fix:hover{
+    color: grey;
+}
 .dash-info {
     margin-top: 2em;
 }

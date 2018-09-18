@@ -1,5 +1,6 @@
 <?php
 require("assets/incl/header.php");
+$newsObj = new News();
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -15,36 +16,20 @@ require("assets/incl/header.php");
         </div>
     </div>
     <div class="row">
+        <?php foreach($newsObj->listNews8() as $new) :?>
         <div class="col-lg-4 news">
-            <img src="assets/images/art1.jpg" alt="art" class="full-img">
+            <img src="/assets/data/fotos/indhold/<?php echo $new['img_path']?>" alt="art" class="full-img" height="250px">
             <div>
-                <h4>SPILD AF TID PÅ INDIANSK</h4>
-                <p class="blur">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea quas doloremque esse
-                    magnam ex fugiat
-                    perferendis earum laboriosam riosam eveniet minus quasi eveniet minus quasi la</p>
-                <a class="btn-a-black text-center" href="#">LÆS MERE</a>
+                <h4>
+                    <?php echo $new['title']?>
+                </h4>
+                <p class="blur" maxlength="5">
+                    <?php echo substr($new['description'], 0, 200)?>
+                </p>
+                <a class="btn-a-black text-center" href="?news=<?php echo $new['id']?>">LÆS MERE</a>
             </div>
         </div>
-        <div class="col-lg-4 news">
-            <img src="assets/images/art1.jpg" alt="art" class="full-img">
-            <div>
-                <h4>SPILD AF TID PÅ INDIANSK</h4>
-                <p class="blur">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea quas doloremque esse
-                    magnam ex fugiat
-                    perferendis earum laboriosam riosam eveniet minus quasi eveniet minus quasi la</p>
-                <a class="btn-a-black text-center" href="#">LÆS MERE</a>
-            </div>
-        </div>
-        <div class="col-lg-4 news">
-            <img src="assets/images/art1.jpg" alt="art" class="full-img">
-            <div>
-                <h4>SPILD AF TID PÅ INDIANSK</h4>
-                <p class="blur">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea quas doloremque esse
-                    magnam ex fugiat
-                    perferendis earum laboriosam riosam eveniet minus quasi eveniet minus quasi la</p>
-                <a class="btn-a-black text-center" href="#">LÆS MERE</a>
-            </div>
-        </div>
+        <?php endforeach; ?>
         <div class="col-lg-12 newsarchieve">
             <a href="#" class="p-0 m-0 a-remove">NYHEDSAKRIV</a>
         </div>

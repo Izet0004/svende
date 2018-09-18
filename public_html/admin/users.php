@@ -10,6 +10,7 @@
 </div>
 
 <?php include_once("assets/incl/footer.php")?>
+<script src="assets/js/xhrusers.js"></script>
 <script>
     listUsers()
 </script>

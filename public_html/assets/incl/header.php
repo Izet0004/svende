@@ -16,8 +16,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 
@@ -48,9 +47,26 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">PRAKTISK INFO</a>
                     </li>
+                    <?php if($auth->isMember() || $auth->isAdmin()) :?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Min side
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="#">Mit program</a>
+                            <a class="dropdown-item" href="#">Redigere Profil</a>
+                            <a class="dropdown-item" href="?logout">Log ud</a>
+                            <?php
+                            if($auth->isAdmin()) { echo('<a class="dropdown-item" href="#">Admin</a>');}
+                            ?>
+                        </div>
+                    </li>
+                    <?php else :?>
                     <li class="nav-item">
                         <a class="nav-link" href="#">LOGIN</a>
                     </li>
+                    <?php endif;?>
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="material-icons">
                                 search

@@ -92,6 +92,13 @@ class HtmlHelper
         return $accHtml;
         
     }
+    static function presentPicture($label, $prefix, $src, $alt, $options = ""){
+        $accHtml = "";
+        $accHtml .= '<p>'.$label;
+        $accHtml .= '</p>';
+        $accHtml .= '<img src="'.$prefix.''.$src.'" alt="'.$alt.'" '.$options.'>';
+        return $accHtml;
+    }
     /**
      * Present list with prefix
      * Example presentList(["Brugernavn", "Fornavn"], $items)

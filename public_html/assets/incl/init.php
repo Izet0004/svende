@@ -7,4 +7,9 @@ require_once(COREPATH . "classes/autoloader.php");
 $db = new db();
 $auth = new auth();
 $pdo = db::$pdo;
+if(isset($_GET["logout"])){
+    session_unset();
+    session_regenerate_id();
+    header("Location: index.php");
+}
 ?>
