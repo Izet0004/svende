@@ -1,6 +1,4 @@
 <?php
-// echo password_hash("admin", PASSWORD_BCRYPT);
-// exit();
 include_once("assets/incl/init.php");
 $pageTitle = "Login";
 $errorLogin = false;

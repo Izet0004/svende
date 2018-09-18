@@ -100,9 +100,9 @@ class User extends Db{
         return $row;
     }
     public function getLastId(){
-        $sql = "SELECT id FROM user ORDER BY id DESC LIMIT 1";
+        $sql = "SELECT user_id FROM user ORDER BY user_id DESC LIMIT 1";
         $stmt = self::$pdo->query($sql);
-        $row = $stmt->fetch();
+        $row = $stmt->fetchColumn();
         return $row;
     }
     public function saveUser($data){
@@ -125,30 +125,40 @@ class User extends Db{
             ":address" => $data["address"]->value,
             ":userId" => $data["userId"]->value,
         ]);
+
+        // Roles
+        $sql2 = "UPDATE userroles_rel SET role_id=:role_id WHERE user_id = :user_id";
+        $stmt2 = self::$pdo->prepare($sql2);
+        $data["role"]->value == "Admin" ? $data["role"]->value = 1 : $data["role"]->value = 2;
+        $stmt2->execute([
+            ":role_id" => $data["role"]->value,
+            ":user_id" => $data["userId"]->value
+        ]);
     }
     public function createUser($data){
-        echo var_dump($data);
-        // $data["zip"]->value = (int)$data["zip"]->value;
-        $sql = "INSERT into user (first_name, last_name, address, zip, phone, email, username, password) VALUES (
-            :first_name,
-            :last_name,
-            :address,
-            :zip,
-            :phone,
-            :email,
-            :username,
-            :password
-        )";
+        $sql = "INSERT INTO user (name, email,zip, address, password) VALUES (
+        :name,
+        :email,
+        :zip,
+        :address,
+        :password)";
         $stmt = self::$pdo->prepare($sql);
+        $hashedPass = password_hash($data["password"]->value, PASSWORD_BCRYPT);
         $stmt->execute([
-            ":username" => $data["username"]->value,
-            ":first_name" => $data["firstName"]->value,
-            ":last_name" => $data["lastName"]->value,
-            ":address" => $data["address"]->value,
-            ":password" => $data["password"]->value,
-            ":phone" => $data["phone"]->value,
+            ":name" => $data["name"]->value,
             ":email" => $data["email"]->value,
-            ":zip" => $data["zip"]->value
+            ":zip" => $data["zip"]->value,
+            ":address" => $data["address"]->value,
+            ":password" => $hashedPass
+        ]);
+
+        // Roles
+        $sql2 = "INSERT INTO userroles_rel (role_id, user_id) VALUES (:role_id,:user_id)";
+        $stmt2 = self::$pdo->prepare($sql2);
+        $data["role"]->value == "Admin" ? $data["role"]->value = 1 : $data["role"]->value = 2;
+        $stmt2->execute([
+            ":role_id" => $data["role"]->value,
+            ":user_id" => $this->getLastId()
         ]);
     }
     // public function saveUser($data){

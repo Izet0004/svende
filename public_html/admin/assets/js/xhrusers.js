@@ -17,23 +17,25 @@ function editUser(id) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            modalData("Edit User", xhttp.response, '<div><button type="button" name="" id="" onclick="saveUser()" class="btn btn-primary btn-green" btn-lg btn-block>Gem</button></div>');
+            modalData("Edit User", xhttp.response, '<div><button type="submit" name="" id=""  class="btn btn-primary btn-green" btn-lg btn-block>Gem</button></div>', "saveUser()");
         }
     };
     xhttp.send("userId=" + id + "&edit");
 }
-function createUser(){
+
+function createUser() {
     let xhttp = new XMLHttpRequest();
     xhttp.open("POST", "handlers/usersHandle.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            modalData("Create User", xhttp.response, '<div><button type="button" name="" id="" onclick="saveUser()" class="btn btn-primary btn-green" btn-lg btn-block>Gem</button></div>');
+            modalData("Create User", xhttp.response, '<div><button type="submit" name="" id="" onclick="saveUser()" class="btn btn-primary btn-green" btn-lg btn-block>Gem</button></div>');
         }
     };
     xhttp.send("userId=0" + "&edit");
 }
-function saveUser(){
+
+function saveUser() {
     let xhttp = new XMLHttpRequest();
     let modalBody = document.getElementById("modalBody");
     let inputs = modalBody.querySelectorAll("input, select");
@@ -70,8 +72,8 @@ function listUsers() {
     xhttp.send("listUsers");
 }
 
-function deleteUser(id){
-    if(confirm("Er du sikker på du vil slette?")){
+function deleteUser(id) {
+    if (confirm("Er du sikker på du vil slette?")) {
         let xhttp = new XMLHttpRequest();
         xhttp.open("POST", "handlers/usersHandle.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -88,9 +90,9 @@ function deleteUser(id){
 // MODAL
 
 // VALIDATE FORM IN MODAL
-function modalData(heading = "Modal", data, saveButton = "") {
-    if(saveButton.length > 0){
-        Modal(heading, data, saveButton);
+function modalData(heading = "Modal", data, saveButton = "", script="") {
+    if (saveButton.length > 0) {
+        Modal(heading, data, saveButton, script);
     } else {
         Modal(heading, data);
     }
@@ -108,19 +110,19 @@ function toggleModal() {
         modalContainer.remove();
     }
 }
-function Modal(heading = "Modal", body = "Body", saveButton = "", script=""){
+
+function Modal(heading = "Modal", body = "Body", saveButton = "", script = "") {
     let bodyElm = document.getElementById("body");
     let modalHtml = "";
     modalHtml += '<div class="modalContainer" id="modalContainer">';
-    modalHtml += '<div class="customModal" id="modalCustom">';
+    modalHtml += '<form onsubmit="' + script + '; return false;" action="" method="POST" class="customModal" id="modalCustom">';
     modalHtml += '<div id="modalHeading">'
     modalHtml += '<div><h3>' + heading + '</h3></div></div>';
     modalHtml += '<div id="modalBody">' + body + '</div>';
     modalHtml += '<div id="modalFooter">';
     modalHtml += '<div><button type="button" onclick="toggleModal()" name="" id="" class="btn btn-primary btn-dark" btn-lg btn-block>Annuller</button></div>';
     modalHtml += saveButton;
-    modalHtml += script;
-    modalHtml += '</div></div></div>';
+    modalHtml += '</div></form></div>';
     bodyElm.innerHTML += modalHtml;
     toggleModal();
 }

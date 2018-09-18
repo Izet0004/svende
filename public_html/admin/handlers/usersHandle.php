@@ -60,24 +60,25 @@ function editUser($userId){
     $user = new User();
     $user->getUserSingle($userId);
     echo htmlHelper::presentHidden("userId", $userId);
-    echo htmlHelper::presentInput("name", "Navn", "text", $user->name, $user->name, "required");
-    echo htmlHelper::presentInput("email", "Email", "text", $user->email, $user->email, "required");
+    echo htmlHelper::presentInput("name", "Navn", "text", $user->name, $user->name, "", "required pattern='[A-Za-z]+'");
+    echo htmlHelper::presentInput("email", "Email", "text", $user->email, $user->email, "", "required");
     echo htmlHelper::presentInput("address", "Addresse", "text", $user->address, $user->address, "", "required");
-    echo htmlHelper::presentInput("zip", "Post nr.", "text", $user->zip, $user->zip, "required");
+    echo htmlHelper::presentInput("zip", "Post nr.", "text", $user->zip, $user->zip, "", "required");
     $userSusp = [];
+    $userRoles = [];
     $user->isSuspended == 0 ? $userSusp = "Nej" : $userSusp = "Ja";
     echo htmlHelper::presentOptions("Suspenderet","isSuspended", ["Ja", "Nej"], $userSusp);
+    $user->roleId == 1 ? $userRoles = "Admin" : $userRoles = "Extranet";
+    echo htmlHelper::presentOptions("Rolle","role", ["Admin", "Extranet"], $userRoles);
+
 }
 function createUser(){
-    echo htmlHelper::presentInput("username", "Brugernavn", "text");
-    echo htmlHelper::presentInput("password", "Password", "text");
-    echo htmlHelper::presentInput("firstName", "Fornavn", "text");
-    echo htmlHelper::presentInput("lastName", "Efternavn", "text");
-    echo htmlHelper::presentInput("phone", "Tlf", "text");
-    echo htmlHelper::presentInput("email", "Email", "text");
-    echo htmlHelper::presentInput("address", "Addresse", "text");
-    echo htmlHelper::presentInput("zip", "Post nr.", "text", "", "", "zipInput");
-    echo htmlHelper::presentInput("city", "By", "text", "", "", "cityOutput", "", "disabled");
+    echo htmlHelper::presentInput("name", "Navn", "text", "", "", "", "required pattern='[A-Za-z]+'");
+    echo htmlHelper::presentInput("email", "Email", "text", "", "", "", "required");
+    echo htmlHelper::presentInput("password", "Password", "password", "", "", "", "required");
+    echo htmlHelper::presentInput("address", "Addresse", "text","","", "", "required");
+    echo htmlHelper::presentInput("zip", "Post nr.", "text", "", "", "", "required");
+    echo htmlHelper::presentOptions("Rolle","role", ["Admin", "Extranet"],[1,2]);
 }
 function deleteUser($id){
     $user = new User();
