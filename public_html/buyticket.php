@@ -64,8 +64,8 @@ require("assets/incl/header.php");
             </div>
         </div>
     </div>
-    <div class="row">
-        <form class="col-lg-6 ticket-form">
+    <form class="row">
+        <div class="col-lg-6 ticket-form">
             <p class="font-32">Reserver Camp pladser</p>
             <div class="buy-ticket-up-flex">
                 <div class="buy-ticket-up">
@@ -119,15 +119,15 @@ require("assets/incl/header.php");
                         placeholder="By:">
                 </div>
             </div>
-        </form>
+        </div>
         <div class="col-lg-6">
             <p class="font-32">Vælg forsendelsmetode</p>
             <div>
-                <div>
+                <div class="ticket-form-delivery">
                     <div class="form-check">
                         <label class="form-check-label font-18">
                             <input type="radio" class="form-check-input" name="" id="" value="checkedValue">
-                            <b>Jeg ønsker billeterne tilsend<br></b>
+                            <b>Jeg ønsker billeterne tilsendt<br></b>
                             <small>Vi sender billeterne til dig med posten</small>
                         </label>
                     </div>
@@ -135,12 +135,16 @@ require("assets/incl/header.php");
                         <label class="form-check-label font-18">
                             <input type="radio" class="form-check-input" name="" id="" value="checkedValue">
                             <b>Jeg udskriver billeterne selv<br></b>
-                            <small>Du modtager billeterne på din email. Du kan så selv udskrive dem, og du sparer således forsendelses-gebyret</small>
+                            <small>Du modtager billeterne på din email. Du kan så selv udskrive dem, og du sparer
+                                således forsendelses-gebyret</small>
                         </label>
                     </div>
                 </div>
             </div>
+            <div class="ticket-form-submit">
+                <a class="white bg-blue font-32" href="#">SEND</a>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 <?php require("assets/incl/footer.php")?>

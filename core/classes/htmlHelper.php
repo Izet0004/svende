@@ -17,16 +17,23 @@ class HtmlHelper
      * @param string $id
      * @return string $html
      */
-    static function presentInput($name = "", $labelText = "", $inputType = "", $placeholder = "", $value = "", $id = "", $script = ""){
+    static function presentInput($name = "", $labelText = "", $inputType = "", $placeholder = "", $value = "", $id = "", $validate = ""){
         $accHtml = "";
-        echo $script;
         $accHtml .= '<div class="form-group">
         <label for="'.$name.'">'.$labelText.'</label>
         <input type="'.$inputType.'"
-          class="form-control" name="'.$name.'" id="'.$id.'" value="'.$value.'" placeholder="'.$placeholder.'">
+          '.$validate.' class="form-control" name="'.$name.'" id="'.$id.'" value="'.$value.'" placeholder="'.$placeholder.'">
       </div>';
       return $accHtml;
     }
+    // static function presentCheck(){
+    //     $accHtml = "";
+    //     $accHtml .= '<div class="form-checfk">
+    //         <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+    //         Display value
+    //     </div>';
+    //     return $accHtml;
+    // }
     /**
      * Undocumented function
      *
@@ -34,13 +41,17 @@ class HtmlHelper
      * @param array $options
      * @return void
      */
-    static function presentOptions($name = "", $options = []){
+    static function presentOptions($txt = "", $name ="", $options = [], $checked = ""){
         $accHtml = "";
         $accHtml .= '<div class="form-group">
-        <label for="'.$name.'">'.$name.'</label>
-        <select class="form-control" id="'.$name.'">';
+        <label for="'.$name.'">'.$txt.'</label>
+        <select class="form-control" name="'.$name.'" id="'.$name.'">';
         foreach($options as $option){
-            $accHtml .= '<option>'.$option.'</option>';
+            if($checked == $option){
+                $accHtml .= '<option selected value="'.$option.'">'.$option.'</option>';
+            } else {
+                $accHtml .= '<option value="'.$option.'">'.$option.'</option>';
+            }
         }
         $accHtml .= '</select></div>';
         return $accHtml;

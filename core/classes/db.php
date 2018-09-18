@@ -1,10 +1,10 @@
 <?php
 class Db{
     
-    private $host = "127.0.0.1";
-    private $dbName = "vandre";
-    private $dbUsername = "root";
-    private $dbPassword = "";
+    private $host = "sql.itcn.dk:3306";
+    private $dbName = "izet0004.SKOLE";
+    private $dbUsername = "izet0004.SKOLE";
+    private $dbPassword = "HvchT1M054";
     private $charset = "utf8mb4";
     private $opt = [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,

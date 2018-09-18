@@ -18,6 +18,13 @@ elseif(isset($_POST["userId"]) && isset($_POST["edit"])){
         createUser();
     }
 }
+elseif(isset($_POST["userId"]) && isset($_POST["delete"])){
+    $userId = filter_var($_POST["userId"], FILTER_SANITIZE_STRING);
+    if($userId > 0){
+        // Viewing user details
+        deleteUser($userId);
+    }
+}
 elseif(isset($_POST["listUsers"])){
     // List users
     listUsers();
@@ -35,9 +42,9 @@ elseif(isset($_POST["save"]) && isset($_POST["data"])){
 function listUsers(){
     $user = new User();
     $users = $user->listUsers();
-    $tableHead = ["Id","Username", "First Name", "Last Name", "Options"];
+    $tableHead = ["Id","Email", "Name", "Options"];
     echo htmlHelper::presentTable($tableHead, $users, '<i class="material-icons" onClick="showUserDetails(@id)">search</i>
-    <i class="material-icons" onClick="editUser(@id)">create</i>', 'user_id');
+    <i class="material-icons" onClick="editUser(@id)">create</i><i class="material-icons" onClick="deleteUser(@id)">delete</i>', 'user_id');
 }
 function userDetails($userId){
     $user = new User();
@@ -46,20 +53,20 @@ function userDetails($userId){
     $userDetails[0]["is_suspended"] == 0 ? $userDetails[0]["is_suspended"] = "No" : $userDetails[0]["is_suspended"] = "Yes";
     echo '<div>';
     // echo htmlHelper::presentTable(["Id", "Username", "First Name", "Last Name", "Email", "Suspended", "Date Created"], $userDetails);
-    echo htmlHelper::presentList(["Id: ", "Username: ", "First Name: ", "Last Name: ", "Email: ", "Suspended: ", "Date Created: "], $userDetails);
+    echo htmlHelper::presentList(["Id: ", "Email: ", "Name: ","Address: ","Zip: ", "Suspended: ", "Date Created: "], $userDetails);
     echo '</div>';
 }
 function editUser($userId){
     $user = new User();
     $user->getUserSingle($userId);
     echo htmlHelper::presentHidden("userId", $userId);
-    echo htmlHelper::presentInput("username", "Brugernavn", "text", $user->username, $user->username, "");
-    echo htmlHelper::presentInput("firstName", "Fornavn", "text", $user->firstName, $user->firstName, "");
-    echo htmlHelper::presentInput("lastName", "Efternavn", "text", $user->lastName, $user->lastName, "");
-    echo htmlHelper::presentInput("phone", "Tlf", "text", $user->phone, $user->phone, "");
-    echo htmlHelper::presentInput("email", "Email", "text", $user->email, $user->email, "");
-    echo htmlHelper::presentInput("address", "Addresse", "text", $user->address, $user->address, "");
-    echo htmlHelper::presentInput("zip", "Post nr.", "text", $user->zip, $user->zip, "");
+    echo htmlHelper::presentInput("name", "Navn", "text", $user->name, $user->name, "required");
+    echo htmlHelper::presentInput("email", "Email", "text", $user->email, $user->email, "required");
+    echo htmlHelper::presentInput("address", "Addresse", "text", $user->address, $user->address, "", "required");
+    echo htmlHelper::presentInput("zip", "Post nr.", "text", $user->zip, $user->zip, "required");
+    $userSusp = [];
+    $user->isSuspended == 0 ? $userSusp = "Nej" : $userSusp = "Ja";
+    echo htmlHelper::presentOptions("Suspenderet","isSuspended", ["Ja", "Nej"], $userSusp);
 }
 function createUser(){
     echo htmlHelper::presentInput("username", "Brugernavn", "text");
@@ -72,16 +79,20 @@ function createUser(){
     echo htmlHelper::presentInput("zip", "Post nr.", "text", "", "", "zipInput");
     echo htmlHelper::presentInput("city", "By", "text", "", "", "cityOutput", "", "disabled");
 }
-function saveUser($data){
-    // var_dump($data);
+function deleteUser($id){
     $user = new User();
+    if($id > 0){
+        $user->deleteUser($id);
+    }
+}
+function saveUser($data){
+    $user = new User();
+    // If userId is set, we update user, else create user
     if(isset($data["userId"]->value)){
-        // echo $data;
-        $user->test($data);
+        $user->saveUser($data);
         
     } else {
-        // echo $data;
-        $user->testt($data);
+        $user->createUser($data);
     }
 }
 ?>

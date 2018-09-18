@@ -4,6 +4,7 @@ class User extends Db{
     public $username;
     public $firstName;
     public $lastName;
+    public $name;
     public $email;
     public $imgPath;
     public $address;
@@ -21,18 +22,18 @@ class User extends Db{
      * @param STRING $password
      * @return void
      */
-    public function checkUser($username, $password){
+    public function checkUser($email, $password){
         // SQL query, prepare statement and bind params, and execute.
-        $sql = "SELECT user_id, username, password FROM user WHERE username = :username";
+        $sql = "SELECT user_id, email, password FROM user WHERE email = :email";
         $stmt = parent::$pdo->prepare($sql);
-        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
+        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->execute();
         $row = $stmt->fetch();
         if(!empty($row)){
             if(password_verify($password, $row["password"])){
-                $_SESSION["username"] = $username;
+                $_SESSION["email"] = $email;
                 $_SESSION["userId"] = $row["user_id"];
-                $this->username = $username;
+                $this->email = $email;
                 $this->id = $row["user_id"];
                 $this->roleId = $this->getUserRole($row["user_id"]);
                 return true;
@@ -57,7 +58,7 @@ class User extends Db{
         return $row;
     }
     public function listUsers(){
-        $sql = "SELECT user_id,username,first_name,last_name FROM user";
+        $sql = "SELECT user_id,email,name FROM user";
         $stmt = self::$pdo->query($sql);
         $row = $stmt->fetchAll();
         return $row;
@@ -69,35 +70,28 @@ class User extends Db{
         return $row;
     }
     public function getUser($id){
-        $sql = "SELECT user_id,username,first_name,last_name,email,img_path,is_suspended,date_created FROM user WHERE user_id = :id";
+        $sql = "SELECT user_id,email,name,address,zip,is_suspended,date_created FROM user WHERE user_id = :id";
         $stmt = self::$pdo->prepare($sql);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
         $row = $stmt->fetchAll();
         $this->id = $row[0]["user_id"];
-        $this->username = $row[0]["username"];
-        $this->firstName = $row[0]["first_name"];
-        $this->lastName = $row[0]["last_name"];
+        $this->name = $row[0]["name"];
         $this->email = $row[0]["email"];
-        $this->imgPath = $row[0]["img_path"];
         $this->isSuspended = $row[0]["is_suspended"];
         $this->dateCreated = $row[0]["date_created"];
         $this->roleId = $this->getUserRole($row[0]["user_id"]);
         return $row;
     }
     public function getUserSingle($id){
-        $sql = "SELECT user_id,username,first_name,last_name,email,is_suspended,zip,phone,address,date_created FROM user WHERE user_id = :id";
+        $sql = "SELECT user_id,email,name,is_suspended,zip,address,date_created FROM user WHERE user_id = :id";
         $stmt = self::$pdo->prepare($sql);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
         $row = $stmt->fetch();
         $this->id = $row["user_id"];
-        $this->username = $row["username"];
-        $this->firstName = $row["first_name"];
-        $this->lastName = $row["last_name"];
+        $this->name= $row["name"];
         $this->email = $row["email"];
-        // $this->imgPath = $row["img_path"];
-        $this->phone = $row["phone"];
         $this->isSuspended = $row["is_suspended"];
         $this->dateCreated = $row["date_created"];
         $this->zip = $row["zip"];
@@ -111,33 +105,28 @@ class User extends Db{
         $row = $stmt->fetch();
         return $row;
     }
-    public function test($data){
+    public function saveUser($data){
+        var_dump($data);
         $sql = "UPDATE user SET 
-        username = :username,
-        first_name = :first_name,
-        last_name = :last_name,
-        address = :address,
-        zip = :zip,
-        img_path = :img_path,
-        phone = :phone,
-        email = :email, 
-        is_suspended = :is_suspended
+        email=:email,
+        name=:name,
+        is_suspended=:is_suspended,
+        zip=:zip,
+        address=:address
         WHERE user_id = :userId";
+        $data["isSuspended"]->value == "Ja" ? $data["isSuspended"]->value = "1" : $data["isSuspended"]->value = "0";
         $stmt = self::$pdo->prepare($sql);
         $stmt->execute([
-            ":username" => $data["username"]->value,
-            ":first_name" => $data["firstName"]->value,
-            ":last_name" => $data["lastName"]->value,
-            ":address" => $data["address"]->value,
-            ":zip" => $data["zip"]->value,
-            ":img_path" => $data["imgPath"]->value,
-            ":phone" => $data["phone"]->value,
             ":email" => $data["email"]->value,
+            ":name" => $data["name"]->value,
+            ":address" => $data["address"]->value,
             ":is_suspended" => $data["isSuspended"]->value,
+            ":zip" => $data["zip"]->value,
+            ":address" => $data["address"]->value,
             ":userId" => $data["userId"]->value,
         ]);
     }
-    public function testt($data){
+    public function createUser($data){
         echo var_dump($data);
         // $data["zip"]->value = (int)$data["zip"]->value;
         $sql = "INSERT into user (first_name, last_name, address, zip, phone, email, username, password) VALUES (
@@ -162,33 +151,33 @@ class User extends Db{
             ":zip" => $data["zip"]->value
         ]);
     }
-    public function saveUser($data){
-        $sql = "UPDATE user SET 
-        username = :username,
-        first_name = :first_name,
-        last_name = :last_name,
-        address = :address,
-        zip = :zip,
-        img_path = :img_path,
-        phone = :phone,
-        email = :email, 
-        is_suspended = :is_suspended
-        WHERE user_id = :userId";
-        $stmt = self::$pdo->prepare($sql);
-        $stmt->execute([
-            ":username" => $data["username"]->value,
-            ":first_name" => $data["firstName"]->value,
-            ":last_name" => $data["lastName"]->value,
-            ":address" => $data["address"]->value,
-            ":zip" => $data["zip"]->value,
-            ":img_path" => $data["imgPath"]->value,
-            ":phone" => $data["phone"]->value,
-            ":email" => $data["email"]->value,
-            ":is_suspended" => $data["isSuspended"]->value,
-            ":userId" => $data["userId"]->value,
-        ]);
-    }
-    public function createUser($username, $password, $firstName, $lastName, $email, $avatarPath = "stock.png", $roleId = 2){
+    // public function saveUser($data){
+    //     $sql = "UPDATE user SET 
+    //     username = :username,
+    //     first_name = :first_name,
+    //     last_name = :last_name,
+    //     address = :address,
+    //     zip = :zip,
+    //     img_path = :img_path,
+    //     phone = :phone,
+    //     email = :email, 
+    //     is_suspended = :is_suspended
+    //     WHERE user_id = :userId";
+    //     $stmt = self::$pdo->prepare($sql);
+    //     $stmt->execute([
+    //         ":username" => $data["username"]->value,
+    //         ":first_name" => $data["firstName"]->value,
+    //         ":last_name" => $data["lastName"]->value,
+    //         ":address" => $data["address"]->value,
+    //         ":zip" => $data["zip"]->value,
+    //         ":img_path" => $data["imgPath"]->value,
+    //         ":phone" => $data["phone"]->value,
+    //         ":email" => $data["email"]->value,
+    //         ":is_suspended" => $data["isSuspended"]->value,
+    //         ":userId" => $data["userId"]->value,
+    //     ]);
+    // }
+    public function createUsers($username, $password, $firstName, $lastName, $email, $avatarPath = "stock.png", $roleId = 2){
         // Should be in SQL DEFAULT = 1 <<<<<<<<<<<<
         // AVATAR_PATH SHOULD BE STOCK <<<<<<<<<<<<<
         // $lastId = $this->getLastId() + 1;
@@ -240,6 +229,18 @@ class User extends Db{
         $stmt2->bindParam(":roleId", $roleId, PDO::PARAM_INT);
         $stmt2->bindParam(":userId", $userId, PDO::PARAM_INT);
         $stmt2->execute();
+    }
+    public function deleteUser($id){
+        // DELETE ROLES
+        $sql = "DELETE FROM userroles_rel WHERE user_id = :id";
+        $stmt = self::$pdo->prepare($sql);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        // DELETE USER
+        $sql = "DELETE FROM user WHERE user_id = :id";
+        $stmt = self::$pdo->prepare($sql);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
     }
     public function uploadUserAvatar($file){
         $galleryPath = DOCROOT . "/assets/images/userimages/";

@@ -39,17 +39,17 @@ header .bg-light {
     background-color: #f3f3f3;
 }
 
-.news a {
+.news a, .camps-overview a {
     position: relative;
 }
 
-.news a:hover {
+.news a:hover, .camps-overview a:hover {
     background-color: #3a6296;
     text-decoration: none;
     color: #fff;
 }
 
-.news a:hover::after {
+.news a:hover::after, .camps-overview a:hover::after{
     content: '>';
     position: absolute;
     font-weight: 900;
@@ -207,32 +207,79 @@ header .bg-light {
     align-items: end;
     width: 92.1%;
 }
-.buy-ticket-total div:first-child{
+
+.buy-ticket-total div:first-child {
     margin-right: 8em;
 }
 
-.buy-ticket-up-flex{
+.buy-ticket-up-flex {
     display: flex;
     flex-direction: row;
 }
-.buy-ticket-up-flex div{
+
+.buy-ticket-up-flex div {
     display: flex;
     flex-direction: column;
     padding: 1em;
 }
-.buy-ticket-up-flex div:nth-child(2){
+
+.buy-ticket-up-flex div:nth-child(2) {
     width: 100%;
     padding-right: 0;
 }
-.buy-ticket-up-height{
+
+.buy-ticket-up-height {
     height: 100%;
     width: 100%;
 }
-.buy-ticket-up input{
+
+.buy-ticket-up input {
     width: 30px;
 }
-.ticket-form label{
+
+.ticket-form label {
     color: #000;
+}
+
+.ticket-form-delivery {
+    padding: 2.5em 0em;
+}
+
+.ticket-form-submit {
+    height: 63%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: end;
+}
+.ticket-form-submit a{
+    padding: 0.2em 0.4em;
+}
+
+
+/* CAMPS OVERVIEW */
+.camps-overview *{
+    background-color: #f3f3f3;
+}
+.camps-overview ul{
+    padding: 0;
+    list-style: none;
+}
+
+/* LOGIN */
+.login-form{
+    padding: 2em 1em;
+    margin-bottom: 2em;
+}
+.login-button{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+.login-button button{
+    padding: 0.2em 0.5em;
+    border: none;
 }
 /* #region */
 /* FOOTER */
@@ -389,11 +436,12 @@ header .bg-light {
 /* EXTRAS */
 
 /* #region */
-.input-split{
+.input-split {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
+
 .pad-right {
     padding-right: 1em;
 }
@@ -402,6 +450,7 @@ header .bg-light {
     padding-left: 2em !important;
     padding-right: 2em !important;
 }
+
 .pad-sides-1 {
     padding-left: 1em !important;
     padding-right: 1em !important;
@@ -478,9 +527,13 @@ header .bg-light {
 .font-32 {
     font-size: 32px;
 }
-.font-18{
+.font-26{
+    font-size: 26px;
+}
+.font-18 {
     font-size: 18px;
 }
+
 .font-14 {
     font-size: 14px;
 }
@@ -494,6 +547,13 @@ header .bg-light {
 
     .font-36 {
         font-size: 18px;
+    }
+    .ticket-form-submit {
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: end;
     }
 }
 

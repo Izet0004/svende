@@ -36,7 +36,7 @@ function createUser(){
 function saveUser(){
     let xhttp = new XMLHttpRequest();
     let modalBody = document.getElementById("modalBody");
-    let inputs = modalBody.querySelectorAll("input");
+    let inputs = modalBody.querySelectorAll("input, select");
     let data = [];
     inputs.forEach(input => {
         data.push({
@@ -69,9 +69,25 @@ function listUsers() {
     };
     xhttp.send("listUsers");
 }
+
+function deleteUser(id){
+    if(confirm("Er du sikker på du vil slette?")){
+        let xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "handlers/usersHandle.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                listUsers();
+            }
+        };
+        xhttp.send("userId=" + id + "&delete");
+    }
+}
 // USERS AJAX END
 
 // MODAL
+
+// VALIDATE FORM IN MODAL
 function modalData(heading = "Modal", data, saveButton = "") {
     if(saveButton.length > 0){
         Modal(heading, data, saveButton);
