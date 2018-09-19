@@ -57,7 +57,7 @@ class Event extends Db{
         $this->name = $row[0]["artist_name"];
         $this->scene_id = $row[0]["scene_id"];
         $this->artist_id = $row[0]["artist_id"];
-        $this->genresIds = $row[0]["genre_id"];
+        // $this->genresIds = $row[0]["genre_id"];
         return $row;
     }
     public function getEventSingle($id){
@@ -98,19 +98,27 @@ class Event extends Db{
     }
     public function saveEvent($data){
         $sql = "UPDATE event SET 
-        name=:name,
-        description=:description,
-        img_path=:img_path,
-        type_id=:type_id
+        artist_id=:artist,
+        scene_id=:scene,
+        date=:date
         WHERE id = :id";
         // $data["isSuspended"]->value == "Ja" ? $data["isSuspended"]->value = "1" : $data["isSuspended"]->value = "0";
         $stmt = self::$pdo->prepare($sql);
         $stmt->execute([
             ":id" => $data[0],
-            ":name" => $data[1],
-            ":description" => $data[2],
-            ":img_path" => $data[3],
-            "type_id" => $data[4]]);
+            ":artist" => $data[1],
+            ":scene" => $data[2],
+            ":date" => $data[3]]);
+        
+        $sql2 = "DELETE FROM event_genre_rel WHERE event_id = :id";
+        $stmt2 = self::$pdo->prepare($sql2);
+        $stmt2->execute([
+            ":id" => $data[0]]);
+        foreach($data[4] as $id){
+            // var_dump($data[0]);
+            $sql3 = 'INSERT into event_genre_rel (event_id, genre_id) VALUES ('.$data[0].' , '.$id.')';
+            $stmt3 = self::$pdo->query($sql3);
+        }
     }
     public function createEvent($data){
         var_dump($data);
@@ -128,7 +136,11 @@ class Event extends Db{
     }
 
     public function deleteEvent($id){
-        // DELETE USER
+        // DELETE EVENT
+        $sql2 = "DELETE FROM event_genre_rel WHERE event_id = :id";
+        $stmt2 = self::$pdo->prepare($sql2);
+        $stmt2->execute([
+            ":id" => $id]);
         $sql = "DELETE FROM event WHERE id = :id";
         $stmt = self::$pdo->prepare($sql);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
