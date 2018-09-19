@@ -9,8 +9,17 @@ class Genre extends Db{
         $row = $stmt->fetchAll();
         return $row;
     }
+    public function getGenreIds($id){
+        $sql = "SELECT id, title FROM events_genre_rel WHERE event.id = :id";
+        $stmt = self::$pdo->prepare($sql);
+        $stmt->execute([
+            ":id" => $id
+        ]);
+        $row = $stmt->fetchAll();
+        return $row;
+    }
     public function listGenreOverview(){
-        $sql = "SELECT id, title FROM genre ORDER BY date_created ASC";
+        $sql = "SELECT id, title FROM genre";
         $stmt = self::$pdo->query($sql);
         $row = $stmt->fetchAll();
         return $row;

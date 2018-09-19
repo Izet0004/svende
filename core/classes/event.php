@@ -6,15 +6,20 @@ class Event extends Db{
     public $artist_id;
     public $date;
     
+    // JOINS
+    public $scene_name;
+    public $artist_name;
+    public $genre_id;
+    public $artist_description;
  
     public function listEvents(){
-        $sql = "SELECT * FROM artist";
+        $sql = "SELECT * FROM event";
         $stmt = self::$pdo->query($sql);
         $row = $stmt->fetchAll();
         return $row;
     }
     public function listEvent8(){
-        $sql = "SELECT * FROM artist ORDER BY date_created DESC LIMIT 6";
+        $sql = "SELECT * FROM event ORDER BY date_created DESC LIMIT 6";
         $stmt = self::$pdo->query($sql);
         $row = $stmt->fetchAll();
         return $row;
@@ -22,8 +27,10 @@ class Event extends Db{
     public function listEventOverview(){
         $sql = "SELECT event.id, event.date, artist.name, scene.title
         FROM event
+        INNER JOIN scene ON event.scene_id = scene.id
         INNER JOIN artist ON event.artist_id = artist.id
-        INNER JOIN scene ON event.scene_id = scene.id";
+        INNER JOIN event_genre_rel ON event.id = event_genre_rel.event_id
+        INNER JOIN genre ON event_genre_rel.genre_id = genre.id";
         $stmt = self::$pdo->query($sql);
         $row = $stmt->fetchAll();
         return $row;
@@ -35,29 +42,52 @@ class Event extends Db{
         return $row;
     }
     public function getEvent($id){
-        $sql = "SELECT * FROM artist WHERE id = :id";
+        $sql = "SELECT event.scene_id, event.artist_id, event.id, event.date, artist.name AS artist_name, scene.title AS scene_title, artist.description, genre.title AS genre_title
+        FROM event
+        INNER JOIN scene ON event.scene_id = scene.id
+        INNER JOIN artist ON event.artist_id = artist.id
+        INNER JOIN event_genre_rel ON event.id = event_genre_rel.event_id
+        INNER JOIN genre ON event_genre_rel.genre_id = genre.id
+        WHERE event.id = :id";
         $stmt = self::$pdo->prepare($sql);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
         $row = $stmt->fetchAll();
         $this->id = $row[0]["id"];
-        $this->name = $row[0]["name"];
-        $this->description = $row[0]["description"];
-        $this->img_path = $row[0]["img_path"];
-        $this->type_id = $row[0]["type_id"];
+        $this->name = $row[0]["artist_name"];
+        $this->scene_id = $row[0]["scene_id"];
+        $this->artist_id = $row[0]["artist_id"];
+        $this->genresIds = $row[0]["genre_id"];
         return $row;
     }
     public function getEventSingle($id){
-        $sql = "SELECT id, name, description, img_path, type_id FROM artist WHERE id = :id";
+        $sql = "SELECT event.scene_id,artist_id, event.id, event.date, artist.name AS artist_name, scene.title AS scene_title, artist.description, genre.title AS genre_title
+        FROM event
+        INNER JOIN scene ON event.scene_id = scene.id
+        INNER JOIN artist ON event.artist_id = artist.id
+        INNER JOIN event_genre_rel ON event.id = event_genre_rel.event_id
+        INNER JOIN genre ON event_genre_rel.genre_id = genre.id
+        WHERE event.id = :id";
         $stmt = self::$pdo->prepare($sql);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
         $row = $stmt->fetch();
         $this->id = $row["id"];
-        $this->name= $row["name"];
+        $this->name= $row["artist_name"];
         $this->description = $row["description"];
-        $this->img_path = $row["img_path"];
-        $this->type_id = $row["type_id"];
+        $this->date = $row["date"];
+        $this->artist_id = $row["artist_id"];
+        $this->scene_id = $row["scene_id"];
+        // GET GENRE IDS
+        $sql2 = "SELECT genre_id FROM event_genre_rel WHERE event_genre_rel.event_id = :id";
+        $stmt2 = self::$pdo->prepare($sql2);
+        $stmt2->execute([
+            ":id" => $id
+        ]);
+        $row2 = $stmt2->fetchAll(PDO::FETCH_COLUMN);
+        $this->genre_id = $row2;
+        // $this->genre_id = $row["genre_id"];
+        
         return $row;
     }
     public function getLastId(){
@@ -67,7 +97,7 @@ class Event extends Db{
         return $row;
     }
     public function saveEvent($data){
-        $sql = "UPDATE artist SET 
+        $sql = "UPDATE event SET 
         name=:name,
         description=:description,
         img_path=:img_path,
@@ -84,7 +114,7 @@ class Event extends Db{
     }
     public function createEvent($data){
         var_dump($data);
-        $sql = "INSERT INTO artist (name,description,img_path) VALUES(
+        $sql = "INSERT INTO event (name,description,img_path) VALUES(
         :name,
         :description,
         :img_path)";
@@ -99,13 +129,13 @@ class Event extends Db{
 
     public function deleteEvent($id){
         // DELETE USER
-        $sql = "DELETE FROM artist WHERE id = :id";
+        $sql = "DELETE FROM event WHERE id = :id";
         $stmt = self::$pdo->prepare($sql);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
     }
     public function uploadEventImg($file){
-        $galleryPath = DOCROOT . "../assets/data/fotos/artister/";
+        $galleryPath = DOCROOT . "../assets/data/fotos/eventer/";
         if ($file) {
             $imgFile = $_FILES["img_path"]; // Get file from submitted data
         

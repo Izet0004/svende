@@ -57,9 +57,12 @@ class HtmlHelper
         $accHtml .= '</select></div>';
         return $accHtml;
     }
-    static function presentSelect($name = "",$options,  $optionValue, $optionTxt, $selected){
+
+    static function presentSelect($name = "",$options,  $optionValue, $optionTxt, $selected, $label = "Vælg: "){
         $accHtml = "";
-        $accHtml .= '<select name="'.$name.'" >';
+        $accHtml .= '<div class="form-group">';
+        $accHtml .= '<label for="'.$name.'">'.$label.'</label>';
+        $accHtml .= '<select class="form-control" name="'.$name.'" >';
         foreach ($options as $key => $value) {
             if($value[$optionValue] == $selected){
                 $accHtml .= '<option selected value="'.$value[$optionValue].'" >'.$value[$optionTxt].'</option>';
@@ -67,8 +70,42 @@ class HtmlHelper
                 $accHtml .= '<option value="'.$value[$optionValue].'" >'.$value[$optionTxt].'</option>';
             }
         }
-        $accHtml .= '</select>';
+        $accHtml .= '</select></div>';
+
         return $accHtml;
+    }
+    static function presentCheckBox($name = "", $data, $valueMarker = "", $nameMarker = "", $checked = []){
+        $accHtml = "";
+        $index = 0;
+        foreach ($data as $key => $value) {
+            $index = $index + 1;
+            // if($index == 10) { $index = 0; $accHtml .= '<br>';}
+            if(in_array($value[$valueMarker], $checked)){
+                $accHtml .= '<div class="form-check form-check-inline">';
+                $accHtml .= '<label class="form-check-label">';
+                $accHtml .= '<input type="checkbox" checked class="form-check-input" value="'.$value[$valueMarker].'" name="'.$name.'" id="">';
+                $accHtml .= $value[$nameMarker].'</label>';
+                $accHtml .= "</div>";
+            } else {
+                $accHtml .= '<div class="form-check form-check-inline">';
+                $accHtml .= '<label class="form-check-label">';
+                $accHtml .= '<input type="checkbox" class="form-check-input" value="'.$value[$valueMarker].'" name="'.$name.'" id="">';
+                $accHtml .= $value[$nameMarker].'</label>';
+                $accHtml .= "</div>";
+            }
+        }
+        return $accHtml;
+    }
+    static function presentDate($name,$label,$value){
+        $accHtml = "";
+        $accHtml .= '
+        <div class="form-group">
+          <label for="'.$name.'">'.$label.'</label>';
+        $accHtml .= '<input type="datetime-local" value="'.$value.'"
+        class="form-control" name="'.$name.'" id="" aria-describedby="helpId" placeholder="">
+        </div>';
+        return $accHtml;
+
     }
      /**
       * Present a bootstrap list
