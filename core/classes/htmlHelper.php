@@ -43,6 +43,7 @@ class HtmlHelper
      */
     static function presentOptions($txt = "", $name ="", $options = [], $checked = ""){
         $accHtml = "";
+        var_dump($options);
         $accHtml .= '<div class="form-group">
         <label for="'.$name.'">'.$txt.'</label>
         <select class="form-control" name="'.$name.'" id="'.$name.'">';
@@ -56,7 +57,19 @@ class HtmlHelper
         $accHtml .= '</select></div>';
         return $accHtml;
     }
-
+    static function presentSelect($name = "",$options,  $optionValue, $optionTxt, $selected){
+        $accHtml = "";
+        $accHtml .= '<select name="'.$name.'" >';
+        foreach ($options as $key => $value) {
+            if($value[$optionValue] == $selected){
+                $accHtml .= '<option selected value="'.$value[$optionValue].'" >'.$value[$optionTxt].'</option>';
+            } else {
+                $accHtml .= '<option value="'.$value[$optionValue].'" >'.$value[$optionTxt].'</option>';
+            }
+        }
+        $accHtml .= '</select>';
+        return $accHtml;
+    }
      /**
       * Present a bootstrap list
       *

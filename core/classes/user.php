@@ -210,35 +210,21 @@ class User extends Db{
         $stmt2->bindParam(":role_id", $roleId, PDO::PARAM_INT);
         $stmt2->execute();
     }
-    public function updateUser($userId, $username, $firstName, $lastName, $email, $avatarPath, $isSuspended, $roleId){
+    public function updateUser($data){
         // User update
         $sql = "UPDATE user SET
-        username = :username,
-        first_name = :firstName,
-        last_name = :lastName,
-        email = :email,
-        avatar_path = :avatarPath,
-        is_suspended = :isSuspended
-        WHERE id = :id";
-        // Update role
-        $sql2 = "UPDATE usersroles_rel SET
-        role_id = :roleId
-        WHERE user_id = :userId";
+        name = :name,
+        address = :address,
+        zip = :zip
+        WHERE user_id = :id";
         // Update the user row
         $stmt = self::$pdo->prepare($sql);
-        $stmt->bindParam(":id", $userId, PDO::PARAM_INT);
-        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
-        $stmt->bindParam(":firstName", $firstName, PDO::PARAM_STR);
-        $stmt->bindParam(":lastName", $lastName, PDO::PARAM_STR);
-        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-        $stmt->bindParam(":avatarPath", $avatarPath, PDO::PARAM_STR);
-        $stmt->bindParam(":isSuspended", $isSuspended, PDO::PARAM_INT);
-        $stmt->execute();
-        // Update the role row
-        $stmt2 = self::$pdo->prepare($sql2);
-        $stmt2->bindParam(":roleId", $roleId, PDO::PARAM_INT);
-        $stmt2->bindParam(":userId", $userId, PDO::PARAM_INT);
-        $stmt2->execute();
+        $stmt->execute([
+            "id" => $data["userId"],
+            ":name" => $data["name"],
+            ":address" => $data["address"],
+            ":zip" => $data["zip"]
+        ]);
     }
     public function deleteUser($id){
         // DELETE ROLES

@@ -1,38 +1,38 @@
 <?php
-class Newsletter extends Db{
+class Type extends Db{
     public $id;
-    public $email;
+    public $title;
     
-    public function listNewsletters(){
-        $sql = "SELECT * FROM newsletter";
+    public function listTypes(){
+        $sql = "SELECT * FROM type";
         $stmt = self::$pdo->query($sql);
         $row = $stmt->fetchAll();
         return $row;
     }
-    public function listNewsletterOverview(){
-        $sql = "SELECT id, email FROM newsletter ORDER BY date_created ASC";
+    public function listSceneOverview(){
+        $sql = "SELECT id, title FROM scene ORDER BY date_created ASC";
         $stmt = self::$pdo->query($sql);
         $row = $stmt->fetchAll();
         return $row;
     }
-    public function getNewsletter($id){
-        $sql = "SELECT * FROM newsletter WHERE id = :id";
+    public function getType($id){
+        $sql = "SELECT * FROM type WHERE id = :id";
         $stmt = self::$pdo->prepare($sql);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
         $row = $stmt->fetchAll();
         $this->id = $row[0]["id"];
-        $this->email = $row[0]["email"];
+        $this->title = $row[0]["title"];
         return $row;
     }
-    public function getNewsletterSingle($id){
-        $sql = "SELECT id, email FROM newsletter WHERE id = :id";
+    public function getTypeSingle($id){
+        $sql = "SELECT id, title FROM type WHERE id = :id";
         $stmt = self::$pdo->prepare($sql);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
         $row = $stmt->fetch();
         $this->id = $row["id"];
-        $this->email= $row["email"];
+        $this->title= $row["title"];
         return $row;
     }
     public function getLastId(){
@@ -41,29 +41,29 @@ class Newsletter extends Db{
         $row = $stmt->fetchColumn();
         return $row;
     }
-    public function saveNewsletter($data){
-        $sql = "UPDATE newsletter SET 
-        email=:email
+    public function saveType($data){
+        $sql = "UPDATE type SET 
+        title=:title
         WHERE id = :id";
         // $data["isSuspended"]->value == "Ja" ? $data["isSuspended"]->value = "1" : $data["isSuspended"]->value = "0";
         $stmt = self::$pdo->prepare($sql);
         $stmt->execute([
             ":id" => $data[0],
-            ":email" => $data[1]]);
+            ":title" => $data[1]]);
     }
-    public function createNewsletter($data){
+    public function createType($data){
         var_dump($data);
-        $sql = "INSERT INTO newsletter (email) VALUES(
-        :email)";
+        $sql = "INSERT INTO type (title) VALUES(
+        :title)";
         // $data["isSuspended"]->value == "Ja" ? $data["isSuspended"]->value = "1" : $data["isSuspended"]->value = "0";
         $stmt = self::$pdo->prepare($sql);
         $stmt->execute([
-            ":email" => $data[0]]);
+            ":title" => $data[0]]);
     }
 
-    public function deleteNewsletter($id){
+    public function deleteType($id){
         // DELETE USER
-        $sql = "DELETE FROM newsletter WHERE id = :id";
+        $sql = "DELETE FROM type WHERE id = :id";
         $stmt = self::$pdo->prepare($sql);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();

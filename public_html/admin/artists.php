@@ -12,7 +12,7 @@ switch(strtoupper($mode)){
     echo '<div class="create-button"><a name="" id="" class="btn btn-secondary" href="?mode=edit&id=0" role="button">Opret</a></div>';
     $artist = new Artist();
     $artistList = $artist->listArtistOverview();
-    $tableHead = ["Id","Navn", "Indstillinger"];
+    $tableHead = ["Id","Navn", "Type",  "Indstillinger"];
     echo htmlHelper::presentTable($tableHead, $artistList, '<a class="a-fix" href="?mode=details&id=@id"><i class="material-icons">search</i></a>
     <a class="a-fix" href="?mode=edit&id=@id"><i class="material-icons" >create</i></a>
     <a class="a-fix" href="?mode=delete&id=@id"><i class="material-icons delete" >delete</i></a>',
@@ -30,12 +30,20 @@ switch(strtoupper($mode)){
     case "EDIT":
     $id = (int)$_GET["id"];
     $artist = new Artist();
+    $type = new Type();
+    $typeList = $type->listTypes();
     $row = $artist->getArtistSingle($id);
     echo '<form action="?mode=save&id='.$artist->id.'" method="POST" enctype="multipart/form-data">';
     echo htmlHelper::presentInput("name", "Navn", "text", $artist->name, $artist->name, "", "required");
     echo htmlHelper::presentInput("description", "Beskrivelse", "text", htmlspecialchars($artist->description), htmlspecialchars($artist->description), "", "required");
     echo htmlHelper::presentPicture("Nuværende billede","../assets/data/fotos/artister/", $artist->img_path, $artist->img_path, "height='200px' width='200px'");
     echo htmlHelper::presentInput("img_path", "Billede", "file", $artist->img_path, $artist->img_path, "", "");
+    // var_dump($typeList);
+    // var_dump(array_merge($typeList));
+    // foreach ($typeList as $key => $value) {
+    //     var_dump($value["title"]);
+    // }
+    echo htmlHelper::presentSelect("type", $typeList, "id", "title", $artist->type_id);
     echo '<button type="submit" name="" id="" class="btn btn-primary" style="width=100%" btn-lg btn-block">Gem</button>';
     echo '</form>';
     break;
@@ -51,7 +59,8 @@ switch(strtoupper($mode)){
                 filter_var($id, FILTER_SANITIZE_NUMBER_INT),
                 filter_var($_POST["name"], FILTER_SANITIZE_STRING),
                 filter_var($_POST["description"], FILTER_SANITIZE_STRING),
-                filter_var($avatarName, FILTER_SANITIZE_STRING)
+                filter_var($avatarName, FILTER_SANITIZE_STRING),
+                filter_var($_POST["type"], FILTER_SANITIZE_NUMBER_INT)
             ]);
             echo '<script> location.replace("artists.php"); </script>';
         }
@@ -63,7 +72,8 @@ switch(strtoupper($mode)){
             $artist->createArtist([
                 filter_var($_POST["name"], FILTER_SANITIZE_STRING),
                 filter_var($_POST["description"], FILTER_SANITIZE_STRING),
-                filter_var($avatarName, FILTER_SANITIZE_STRING)
+                filter_var($avatarName, FILTER_SANITIZE_STRING),
+                filter_var($_POST["type"], FILTER_SANITIZE_NUMBER_INT)
             ]);
         }
         echo '<script> location.replace("artists.php"); </script>';

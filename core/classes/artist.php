@@ -4,6 +4,7 @@ class Artist extends Db{
     public $name;
     public $description;
     public $img_path;
+    public $type_id;
     
  
     public function listArtists(){
@@ -19,7 +20,8 @@ class Artist extends Db{
         return $row;
     }
     public function listArtistOverview(){
-        $sql = "SELECT id, name FROM artist";
+        $sql = "SELECT artist.id, artist.name,type.title FROM artist
+        INNER JOIN type ON artist.type_id = type.id";
         $stmt = self::$pdo->query($sql);
         $row = $stmt->fetchAll();
         return $row;
@@ -40,10 +42,11 @@ class Artist extends Db{
         $this->name = $row[0]["name"];
         $this->description = $row[0]["description"];
         $this->img_path = $row[0]["img_path"];
+        $this->type_id = $row[0]["type_id"];
         return $row;
     }
     public function getArtistSingle($id){
-        $sql = "SELECT id, name, description, img_path FROM artist WHERE id = :id";
+        $sql = "SELECT id, name, description, img_path, type_id FROM artist WHERE id = :id";
         $stmt = self::$pdo->prepare($sql);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -52,6 +55,7 @@ class Artist extends Db{
         $this->name= $row["name"];
         $this->description = $row["description"];
         $this->img_path = $row["img_path"];
+        $this->type_id = $row["type_id"];
         return $row;
     }
     public function getLastId(){
@@ -65,6 +69,7 @@ class Artist extends Db{
         name=:name,
         description=:description,
         img_path=:img_path,
+        type_id=:type_id
         WHERE id = :id";
         // $data["isSuspended"]->value == "Ja" ? $data["isSuspended"]->value = "1" : $data["isSuspended"]->value = "0";
         $stmt = self::$pdo->prepare($sql);
@@ -72,7 +77,8 @@ class Artist extends Db{
             ":id" => $data[0],
             ":name" => $data[1],
             ":description" => $data[2],
-            ":img_path" => $data[3]]);
+            ":img_path" => $data[3],
+            "type_id" => $data[4]]);
     }
     public function createArtist($data){
         var_dump($data);
@@ -85,7 +91,8 @@ class Artist extends Db{
         $stmt->execute([
             ":name" => $data[0],
             ":description" => $data[1],
-            ":img_path" => $data[2]]);
+            ":img_path" => $data[2],
+            ":type_id" => $data[3]]);
     }
 
     public function deleteArtist($id){
