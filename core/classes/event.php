@@ -11,7 +11,27 @@ class Event extends Db{
     public $artist_name;
     public $genre_id;
     public $artist_description;
- 
+    public $img_path;
+    
+    public function getEventByDay($day){
+        $eventsFound = [];
+        $sql = "SELECT scene.id as scene_id,event.id, event.date, artist.name,artist_id as artist_id, scene.title as scene_title
+        FROM EVENT
+        INNER JOIN scene ON event.scene_id = scene.id
+        INNER JOIN artist ON event.artist_id = artist.id
+        ";
+        $stmt = self::$pdo->query($sql);
+        $row = $stmt->fetchAll();
+        foreach($row as $event){
+            $timestamp = strtotime($event["date"]);
+            $eventDay = date('l', $timestamp);
+            if($eventDay == $day)
+            {
+                $eventsFound[] = $event;
+            }
+        }
+        return $eventsFound;
+    }
     public function listEvents(){
         $sql = "SELECT * FROM event";
         $stmt = self::$pdo->query($sql);
@@ -24,6 +44,7 @@ class Event extends Db{
         $row = $stmt->fetchAll();
         return $row;
     }
+
     public function listEventOverview(){
         $sql = "SELECT event.id, event.date, artist.name, scene.title
         FROM event
@@ -61,7 +82,7 @@ class Event extends Db{
         return $row;
     }
     public function getEventSingle($id){
-        $sql = "SELECT event.scene_id,artist_id, event.id, event.date, artist.name AS artist_name, scene.title AS scene_title, artist.description, genre.title AS genre_title
+        $sql = "SELECT event.scene_id,artist_id, event.id, event.date, artist.name AS artist_name, scene.title AS scene_title, artist.description, genre.title AS genre_title, artist.img_path
         FROM event
         INNER JOIN scene ON event.scene_id = scene.id
         INNER JOIN artist ON event.artist_id = artist.id
@@ -78,6 +99,10 @@ class Event extends Db{
         $this->date = $row["date"];
         $this->artist_id = $row["artist_id"];
         $this->scene_id = $row["scene_id"];
+        $this->scene_name = $row["scene_title"];
+        $this->img_path = $row["img_path"];
+        // var_dump($row);
+        $this->date = $row["date"];
         // GET GENRE IDS
         $sql2 = "SELECT genre_id FROM event_genre_rel WHERE event_genre_rel.event_id = :id";
         $stmt2 = self::$pdo->prepare($sql2);

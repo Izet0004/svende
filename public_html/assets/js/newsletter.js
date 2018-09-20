@@ -4,12 +4,13 @@ function toast(text) {
     toaster.style.display = "flex";
     setTimeout(function () {
         toaster.style.display = "none";
-    }, 2000);
+    }, 5000);
 
 }
 
 function newsletterSignup(elm) {
     let email = document.getElementById("emailInput").value;
+    console.log(email);
     let xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/handlers/newsletterHandle.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

@@ -13,8 +13,8 @@
             <p class="font-62 white">TILMELD NYHEDSBREV</p>
             <p class="white">Få seneste nyt sendt direkte til din indbakke</p>
             <div>
-                <input type="text" placeholder="INDTAST DIN E-MAIL" name="newsletter" id="">
-                <a href="#" class="a-remove">TILMELD NYHEDSBREV</a>
+                <input type="text" class="white" id="emailInput" placeholder="INDTAST DIN E-MAIL" name="newsletter">
+                <a href="javascript:;" onclick="newsletterSignup(this)" class="a-remove">TILMELD NYHEDSBREV</a>
             </div>
         </div>
     </div>

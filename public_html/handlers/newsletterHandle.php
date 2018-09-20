@@ -9,6 +9,7 @@ if(isset($_POST["newsletterEmail"])){
             $newsletter->signUp($email);
             echo 'Du er nu tilmeldt som: ' . $email;
         } catch(PDOException $e){
+            // echo $e;
             echo "Email allerede tilmeldt";
         }
     } else {

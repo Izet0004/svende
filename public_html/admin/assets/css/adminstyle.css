@@ -9,9 +9,7 @@ body * {
     list-style: none;
     text-decoration: none;
 }
-textarea{
-    height: 2000px;
-}
+
 .create-button {
     margin: 1em 0em;
     width: 100%;

@@ -60,7 +60,12 @@ class Newsletter extends Db{
         $stmt->execute([
             ":email" => $data[0]]);
     }
-
+    public function signUp($email){
+        $sql = "INSERT INTO newsletter (email) VALUES (:email)";
+        $stmt = parent::$pdo->prepare($sql);
+        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
+        $stmt->execute();
+    }
     public function deleteNewsletter($id){
         // DELETE USER
         $sql = "DELETE FROM newsletter WHERE id = :id";

@@ -20,7 +20,7 @@
 
 </head>
 
-<body>
+<body id="body">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light container">
             <a class="navbar-brand" href="#">
@@ -38,8 +38,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">NYHEDER</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">EVENTS</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            EVENTS
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="program.php">Programmer</a>
+                        <a class="dropdown-item" href="#">Line-up</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">CAMPS</a>
@@ -55,10 +62,10 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="#">Mit program</a>
-                            <a class="dropdown-item" href="#">Redigere Profil</a>
+                            <a class="dropdown-item" href="userprofile.php">Redigere Profil</a>
                             <a class="dropdown-item" href="?logout">Log ud</a>
                             <?php
-                            if($auth->isAdmin()) { echo('<a class="dropdown-item" href="#">Admin</a>');}
+                            if($auth->isAdmin()) { echo('<a class="dropdown-item" href="/admin">Admin</a>');}
                             ?>
                         </div>
                     </li>
