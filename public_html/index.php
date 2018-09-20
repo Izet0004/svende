@@ -1,4 +1,5 @@
 <?php
+$pageTitle = "MEDIESUSET";
 require("assets/incl/header.php");
 $newsObj = new News();
 ?>
@@ -26,12 +27,12 @@ $newsObj = new News();
                 <p class="blur" maxlength="5">
                     <?php echo substr($new['description'], 0, 200)?>
                 </p>
-                <a class="btn-a-black text-center" href="?news=<?php echo $new['id']?>">LÆS MERE</a>
+                <a class="btn-a-black text-center" href="news.php?news_id=<?php echo $new['id']?>">LÆS MERE</a>
             </div>
         </div>
         <?php endforeach; ?>
         <div class="col-lg-12 newsarchieve">
-            <a href="#" class="p-0 m-0 a-remove">NYHEDSAKRIV</a>
+            <a href="news.php" class="p-0 m-0 a-remove">NYHEDSAKRIV</a>
         </div>
     </div>
 </div>

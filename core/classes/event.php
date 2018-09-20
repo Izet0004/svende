@@ -32,6 +32,46 @@ class Event extends Db{
         }
         return $eventsFound;
     }
+    public function getEventByAlpha(){
+        $eventsFound = [];
+        $sql = "SELECT scene.id as scene_id,event.id, event.date, artist.name,artist_id as artist_id, scene.title as scene_title
+        FROM EVENT
+        INNER JOIN scene ON event.scene_id = scene.id
+        INNER JOIN artist ON event.artist_id = artist.id
+        ORDER BY artist.name ASC";
+        $stmt = self::$pdo->query($sql);
+        $row = $stmt->fetchAll();
+        return $row;
+    }
+    public function getEventByScene($id){
+        $eventsFound = [];
+        $sql = "SELECT scene.id as scene_id,event.id, event.date, artist.name,artist_id as artist_id, scene.title as scene_title
+        FROM EVENT
+        INNER JOIN scene ON event.scene_id = scene.id
+        INNER JOIN artist ON event.artist_id = artist.id
+        WHERE scene.id = :id
+        ORDER BY event.date ASC";
+        $stmt = self::$pdo->prepare($sql);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetchAll();
+        return $row;
+    }
+    public function getEventByType($id){
+        $sql = "SELECT artist.type_id AS type_id,scene.id AS scene_id,event.id, event.date, artist.name,artist_id AS artist_id, scene.title AS scene_title
+        FROM EVENT
+        INNER JOIN scene ON event.scene_id = scene.id
+        INNER JOIN artist ON event.artist_id = artist.id
+        WHERE artist.type_id = :id
+        ORDER BY artist.name ASC";
+        $stmt = self::$pdo->prepare($sql);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetchAll();
+        return $row;
+    }
+
+
     public function listEvents(){
         $sql = "SELECT * FROM event";
         $stmt = self::$pdo->query($sql);

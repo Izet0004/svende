@@ -39,17 +39,20 @@ header .bg-light {
     background-color: #f3f3f3;
 }
 
-.news a, .camps-overview a {
+.news a,
+.camps-overview a {
     position: relative;
 }
 
-.news a:hover, .camps-overview a:hover {
+.news a:hover,
+.camps-overview a:hover {
     background-color: #3a6296;
     text-decoration: none;
     color: #fff;
 }
 
-.news a:hover::after, .camps-overview a:hover::after{
+.news a:hover::after,
+.camps-overview a:hover::after {
     content: '>';
     position: absolute;
     font-weight: 900;
@@ -90,7 +93,7 @@ header .bg-light {
     text-shadow: 0 2px 6px rgba(0, 0, 0, 1);
     color: #fff;
     font-size: 26px;
-    background-color: #a33a49;
+    /* background-color: #a33a49; */
 }
 
 /* PROGRAM */
@@ -252,49 +255,65 @@ header .bg-light {
     justify-content: end;
     align-items: end;
 }
-.ticket-form-submit a{
+
+.ticket-form-submit a {
     padding: 0.2em 0.4em;
 }
 
 
 /* CAMPS OVERVIEW */
-.camps-overview *{
+.camps-overview * {
     background-color: #f3f3f3;
 }
-.camps-overview ul{
+
+.camps-overview ul {
     padding: 0;
     list-style: none;
 }
 
+/* NEWS DETAILS */
+
+.news-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /* ARTIST DETAILS */
 
-.artist-details-head{
+.artist-details-head {
     width: 100%;
     margin: 1em 0em;
 }
-.artist-details-head h2{
+
+.artist-details-head h2 {
     margin-bottom: 0;
 }
-.artist-details-info{
+
+.artist-details-info {
     margin: 1em 0em;
     padding: 1em;
 }
 
 /* LOGIN */
-.login-form{
+.login-form {
     padding: 2em 1em;
     margin-bottom: 2em;
 }
-.login-button{
+
+.login-button {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: end;
 }
-.login-button button{
+
+.login-button button {
     padding: 0.2em 0.5em;
     border: none;
 }
+
 /* #region */
 /* FOOTER */
 .follow-us {
@@ -372,9 +391,11 @@ header .bg-light {
 .red {
     color: #a33a49;
 }
+
 .black {
     color: black;
 }
+
 .white {
     color: white !important;
 }
@@ -507,6 +528,7 @@ header .bg-light {
     text-decoration: none;
     color: white;
 }
+
 .a-remove-black {
     color: black;
     text-decoration: none;
@@ -553,9 +575,11 @@ header .bg-light {
 .font-32 {
     font-size: 32px;
 }
-.font-26{
+
+.font-26 {
     font-size: 26px;
 }
+
 .font-18 {
     font-size: 18px;
 }
@@ -574,6 +598,7 @@ header .bg-light {
     .font-36 {
         font-size: 18px;
     }
+
     .ticket-form-submit {
         height: 50%;
         display: flex;
@@ -667,6 +692,7 @@ header .bg-light {
 #modalFooter button {
     margin: 0 0.2em;
 }
+
 /* REMOVE STUFF */
 
 input[type=number]::-webkit-inner-spin-button,
