@@ -128,7 +128,8 @@ class Event extends Db{
         INNER JOIN artist ON event.artist_id = artist.id
         INNER JOIN event_genre_rel ON event.id = event_genre_rel.event_id
         INNER JOIN genre ON event_genre_rel.genre_id = genre.id
-        WHERE event.id = :id";
+        WHERE event.id = :id
+        ORDER BY event.date ASC";
         $stmt = self::$pdo->prepare($sql);
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();

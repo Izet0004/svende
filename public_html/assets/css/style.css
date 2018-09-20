@@ -280,6 +280,36 @@ header .bg-light {
     align-items: center;
 }
 
+/* USER PROGRAMS */
+
+.userprogram-info-wrap{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid black;
+    /* padding: 1em; */
+}
+.userprogram-info-date{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}
+.userprogram-info-date p{
+    margin: 0;
+    padding: 1em;
+}
+.userprogram-info-title{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.userprogram-info-title p{
+    margin: 0;
+    padding: 1em;
+}
 /* ARTIST DETAILS */
 
 .artist-details-head {

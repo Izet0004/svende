@@ -23,7 +23,7 @@
 <body id="body">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index.php">
                 <img src="/assets/images/logo2.png">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -33,23 +33,23 @@
             <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item active pad-right">
-                        <a class="nav-link buy-ticket a-remove white" href="#">KØB BILLET</a>
+                        <a class="nav-link buy-ticket a-remove white" href="ticketoverview.php">KØB BILLET</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">NYHEDER</a>
+                        <a class="nav-link" href="news.php">NYHEDER</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle" href="events.php" id="navbarDropdownMenuLink" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             EVENTS
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="program.php">Programmer</a>
-                        <a class="dropdown-item" href="#">Line-up</a>
+                        <a class="dropdown-item" href="lineup.php">Line-up</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">CAMPS</a>
+                        <a class="nav-link" href="camps.php">CAMPS</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">PRAKTISK INFO</a>
@@ -61,7 +61,7 @@
                             Min side
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Mit program</a>
+                            <a class="dropdown-item" href="userprogram.php">Mit program</a>
                             <a class="dropdown-item" href="userprofile.php">Redigere Profil</a>
                             <a class="dropdown-item" href="?logout">Log ud</a>
                             <?php
@@ -71,7 +71,7 @@
                     </li>
                     <?php else :?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">LOGIN</a>
+                        <a class="nav-link" href="login.php">LOGIN</a>
                     </li>
                     <?php endif;?>
                     <li class="nav-item">

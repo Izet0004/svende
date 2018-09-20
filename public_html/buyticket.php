@@ -126,14 +126,14 @@ require("assets/incl/header.php");
                 <div class="ticket-form-delivery">
                     <div class="form-check">
                         <label class="form-check-label font-18">
-                            <input type="radio" class="form-check-input" name="" id="" value="checkedValue">
+                            <input type="radio" class="form-check-input" name="delivery" id="" value="checkedValue">
                             <b>Jeg ønsker billeterne tilsendt<br></b>
                             <small>Vi sender billeterne til dig med posten</small>
                         </label>
                     </div>
                     <div class="form-check">
                         <label class="form-check-label font-18">
-                            <input type="radio" class="form-check-input" name="" id="" value="checkedValue">
+                            <input type="radio" class="form-check-input" name="delivery" id="" value="checkedValue">
                             <b>Jeg udskriver billeterne selv<br></b>
                             <small>Du modtager billeterne på din email. Du kan så selv udskrive dem, og du sparer
                                 således forsendelses-gebyret</small>
