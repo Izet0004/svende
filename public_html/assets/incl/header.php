@@ -75,7 +75,7 @@
                     </li>
                     <?php endif;?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="material-icons">
+                        <a class="nav-link" href="search.php"><i class="material-icons">
                                 search
                             </i></a>
                     </li>

@@ -282,32 +282,54 @@ header .bg-light {
 
 /* USER PROGRAMS */
 
-.userprogram-info-wrap{
+.userprogram-info-wrap {
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid black;
     /* padding: 1em; */
 }
-.userprogram-info-date{
+
+.userprogram-info-date {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 30%;
 }
-.userprogram-info-date p{
+
+.userprogram-info-date p {
     margin: 0;
     padding: 1em;
 }
-.userprogram-info-title{
+
+.userprogram-info-title {
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
-.userprogram-info-title p{
+
+.userprogram-info-title p {
     margin: 0;
+    padding: 1em;
+}
+
+/* SEARCH */
+.search-form {
+    display: flex;
+    flex-direction: column;
+    margin: 1em 0em;
+}
+
+.search-output a {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+}
+.search-output h2{
     padding: 1em;
 }
 /* ARTIST DETAILS */

@@ -70,7 +70,7 @@ switch ($filter) {
     <div class="row">
         <?php foreach($eventsFound as $event) : ?>
         <figure class="col-lg-4 line-up-bands">
-            <img class="full-img" src="assets/images/dad.jpg" alt="dad">
+            <img class="full-img" src="/assets/data/fotos/artister/<?php echo $event['img_path']?>" alt="dad">
             <figcaption class="<?php if($event["scene_id"] == 1){
                 echo 'bg-red';
             } elseif($event["scene_id"] == 2){

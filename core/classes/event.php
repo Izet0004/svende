@@ -45,7 +45,7 @@ class Event extends Db{
     }
     public function getEventByScene($id){
         $eventsFound = [];
-        $sql = "SELECT scene.id as scene_id,event.id, event.date, artist.name,artist_id as artist_id, scene.title as scene_title
+        $sql = "SELECT artist.img_path,scene.id as scene_id,event.id, event.date, artist.name,artist_id as artist_id, scene.title as scene_title
         FROM EVENT
         INNER JOIN scene ON event.scene_id = scene.id
         INNER JOIN artist ON event.artist_id = artist.id
@@ -68,6 +68,22 @@ class Event extends Db{
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
         $row = $stmt->fetchAll();
+        return $row;
+    }
+    public function getEventByLike($search){
+        $sql = "SELECT artist.description,artist.img_path,artist.type_id AS type_id,scene.id AS scene_id,event.id, event.date, artist.name,artist_id AS artist_id, scene.title AS scene_title
+        FROM EVENT
+        INNER JOIN scene ON event.scene_id = scene.id
+        INNER JOIN artist ON event.artist_id = artist.id
+        WHERE artist.name LIKE :search
+        ORDER BY artist.name ASC";
+        $stmt = self::$pdo->prepare($sql);
+        $search = ''.$search.'%';
+        $stmt->bindParam(":search", $search, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetchAll();
+        // var_dump($search);
+        // var_dump($row);
         return $row;
     }
 
