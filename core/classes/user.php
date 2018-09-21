@@ -187,21 +187,20 @@ class User extends Db{
     //         ":userId" => $data["userId"]->value,
     //     ]);
     // }
-    public function createUsers($username, $password, $firstName, $lastName, $email, $avatarPath = "stock.png", $roleId = 2){
+    public function createUsers($name, $address, $zip, $email, $password, $roleId = 2){
         // Should be in SQL DEFAULT = 1 <<<<<<<<<<<<
         // AVATAR_PATH SHOULD BE STOCK <<<<<<<<<<<<<
         // $lastId = $this->getLastId() + 1;
-        $sql = "INSERT INTO user(username,password,first_name,last_name,email,avatar_path) VALUES (:username, :password, :firstName, :lastName, :email, :avatarpath)";
-        $sql2 = "INSERT INTO usersroles_rel VALUES (:user_id, :role_id)";
+        $sql = "INSERT INTO user(name,address,zip,email,password) VALUES (:name, :address, :zip, :email, :password)";
+        $sql2 = "INSERT INTO userroles_rel VALUES (:user_id, :role_id)";
         $stmt = self::$pdo->prepare($sql);
         $hashedPass = password_hash($password, PASSWORD_BCRYPT);
         // Can be shortened with ARRAY, if all STRING
-        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
-        $stmt->bindParam(":password", $password, PDO::PARAM_STR);
-        $stmt->bindParam(":firstName", $firstName, PDO::PARAM_STR);
-        $stmt->bindParam(":lastName", $lastName, PDO::PARAM_STR);
+        $stmt->bindParam(":name", $name, PDO::PARAM_STR);
+        $stmt->bindParam(":address", $address, PDO::PARAM_STR);
+        $stmt->bindParam(":zip", $zip, PDO::PARAM_STR);
         $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-        $stmt->bindParam(":avatarpath", $avatarpath, PDO::PARAM_STR);
+        $stmt->bindParam(":password", $password, PDO::PARAM_STR);
         $stmt->execute();
         $lastId = self::$pdo->lastInsertId();
         // Insert role, if no role defined, standard role 2 = member
