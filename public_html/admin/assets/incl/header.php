@@ -6,6 +6,7 @@
     <title>
         Admin Panel
     </title>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,6 +17,8 @@
     <link rel="stylesheet" href="assets/css/adminstyle.css">
     <!-- FONTS -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- include summernote css -->
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 
 </head>
 
@@ -23,8 +26,8 @@
     <header>
         <nav class="container navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="index.php">Admin</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -38,13 +41,31 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="siteinfo.php">Site Info</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="users.php">Users</a>
+                        <a class="nav-link" href="users.php">Bruger</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="news.php">Nyheder</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="artists.php">Artister</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="scenes.php">Scener</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.php">Programmer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="camps.php">Camps</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="genres.php">Genre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="types.php">Typer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="newsletters.php">Nyhedsbrev</a>
                     </li>
                 </ul>
             </div>

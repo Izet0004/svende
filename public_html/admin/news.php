@@ -33,7 +33,7 @@ switch(strtoupper($mode)){
     $row = $news->getNewsSingle($id);
     echo '<form action="?mode=save&id='.$news->id.'" method="POST" enctype="multipart/form-data">';
     echo htmlHelper::presentInput("title", "Title", "text", $news->title, $news->title, "", "required");
-    echo htmlHelper::presentInput("description", "Beskrivelse", "text", htmlspecialchars($news->description), htmlspecialchars($news->description), "", "required");
+    echo htmlHelper::presentWysiwyg("description", "Beskrivelse",$news->description, 3, "required");
     echo htmlHelper::presentInput("author", "Forfatter", "text", $news->author, $news->author, "", "required");
     echo htmlHelper::presentPicture("Nuværende billede","../assets/data/fotos/indhold/", $news->img_path, $news->title, "height='200px' width='200px'");
     echo htmlHelper::presentInput("img_path", "Billede", "file", $news->img_path, $news->img_path, "", "");
@@ -53,7 +53,7 @@ switch(strtoupper($mode)){
             $news->saveNews([
                 filter_var($id, FILTER_SANITIZE_NUMBER_INT),
                 filter_var($_POST["title"], FILTER_SANITIZE_STRING),
-                filter_var($_POST["description"], FILTER_SANITIZE_STRING),
+                $_POST["description"],
                 filter_var($_POST["author"], FILTER_SANITIZE_STRING),
                 filter_var($avatarName, FILTER_SANITIZE_STRING),
                 filter_var($_POST["photograph"], FILTER_SANITIZE_STRING),
@@ -67,7 +67,7 @@ switch(strtoupper($mode)){
             empty($_FILES["img_path"]["name"]) ? $avatarName = "stock.jpg" : $avatarName = $news->uploadNewsImg($_FILES["avatar"]);
             $news->createNews([
                 filter_var($_POST["title"], FILTER_SANITIZE_STRING),
-                filter_var($_POST["description"], FILTER_SANITIZE_STRING),
+                $_POST["description"],
                 filter_var($_POST["author"], FILTER_SANITIZE_STRING),
                 filter_var($avatarName, FILTER_SANITIZE_STRING),
                 filter_var($_POST["photograph"], FILTER_SANITIZE_STRING),
@@ -91,5 +91,10 @@ switch(strtoupper($mode)){
         $(".delete").click(function () {
             return confirm("Vil du slette " + this.id + "?");
         });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#summernote').summernote();
     });
 </script>

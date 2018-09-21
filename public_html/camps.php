@@ -1,4 +1,5 @@
 <?php
+$pageTitle = "Camps";
 require("assets/incl/header.php");
 ?>
 <div class="container-fluid">

@@ -26,6 +26,14 @@ class HtmlHelper
       </div>';
       return $accHtml;
     }
+    static function presentWysiwyg($name, $label = "",$value = "", $rows = 3, $validate = ""){
+        $accHtml = "";
+        $accHtml .= '<div class="form-group">';
+        $accHtml .= '<label for="'.$name.'">'.$label.'</label>';
+        $accHtml .= '<textarea class="form-control" name="'.$name.'" id="summernote" rows="'.$rows.'" '.$validate.'>'.$value.'</textarea>';
+        $accHtml .= '</div>';
+        return $accHtml;
+    }
     // static function presentCheck(){
     //     $accHtml = "";
     //     $accHtml .= '<div class="form-checfk">

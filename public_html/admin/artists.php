@@ -24,6 +24,7 @@ switch(strtoupper($mode)){
         $artist = new Artist();
         $artistDetails = $artist->getArtist($id);
         unset($artistDetails[0]["img_path"]);
+        unset($artistDetails[0]["type_id"]);
         echo htmlHelper::presentList(["Id: ", "Title: ", "Beskrivelse: "], $artistDetails);
     }
     break;
@@ -35,7 +36,7 @@ switch(strtoupper($mode)){
     $row = $artist->getArtistSingle($id);
     echo '<form action="?mode=save&id='.$artist->id.'" method="POST" enctype="multipart/form-data">';
     echo htmlHelper::presentInput("name", "Navn", "text", $artist->name, $artist->name, "", "required");
-    echo htmlHelper::presentInput("description", "Beskrivelse", "text", htmlspecialchars($artist->description), htmlspecialchars($artist->description), "", "required");
+    echo htmlHelper::presentWysiwyg("description", "Beskrivelse",$artist->description, 3, "required");
     echo htmlHelper::presentPicture("Nuværende billede","../assets/data/fotos/artister/", $artist->img_path, $artist->img_path, "height='200px' width='200px'");
     echo htmlHelper::presentInput("img_path", "Billede", "file", $artist->img_path, $artist->img_path, "", "");
     // var_dump($typeList);
@@ -58,7 +59,7 @@ switch(strtoupper($mode)){
             $artist->saveArtist([
                 filter_var($id, FILTER_SANITIZE_NUMBER_INT),
                 filter_var($_POST["name"], FILTER_SANITIZE_STRING),
-                filter_var($_POST["description"], FILTER_SANITIZE_STRING),
+                $_POST["description"],
                 filter_var($avatarName, FILTER_SANITIZE_STRING),
                 filter_var($_POST["type"], FILTER_SANITIZE_NUMBER_INT)
             ]);
@@ -71,7 +72,7 @@ switch(strtoupper($mode)){
             empty($_FILES["img_path"]["name"]) ? $avatarName = $artist->img_path : $avatarName = $artist->uploadArtistImg($_FILES["img_path"]);
             $artist->createArtist([
                 filter_var($_POST["name"], FILTER_SANITIZE_STRING),
-                filter_var($_POST["description"], FILTER_SANITIZE_STRING),
+                $_POST["description"],
                 filter_var($avatarName, FILTER_SANITIZE_STRING),
                 filter_var($_POST["type"], FILTER_SANITIZE_NUMBER_INT)
             ]);
@@ -95,5 +96,10 @@ switch(strtoupper($mode)){
         $(".delete").click(function () {
             return confirm("Vil du slette " + this.id + "?");
         });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#summernote').summernote();
     });
 </script>

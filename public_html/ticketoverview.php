@@ -1,4 +1,5 @@
 <?php
+$pageTitle = "Køb Billet";
 require("assets/incl/header.php");
 ?>
 <div class="container-fluid">

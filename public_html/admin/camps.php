@@ -33,7 +33,7 @@ switch(strtoupper($mode)){
     $row = $camp->getCampSingle($id);
     echo '<form action="?mode=save&id='.$camp->id.'" method="POST" enctype="multipart/form-data">';
     echo htmlHelper::presentInput("title", "Title", "text", $camp->title, $camp->title, "", "required");
-    echo htmlHelper::presentInput("description", "Beskrivelse", "textarea", htmlspecialchars($camp->description), htmlspecialchars($camp->description), "", "rows='4' cols='50' required");
+    echo htmlHelper::presentWysiwyg("description", "Beskrivelse",$camp->description, 3, "required");
     echo htmlHelper::presentPicture("Nuværende billede","../assets/data/fotos/indhold/", $camp->img_path, $camp->title, "height='200px' width='200px'");
     echo htmlHelper::presentInput("img_path", "Billede", "file", $camp->img_path, $camp->img_path, "", "");
     echo htmlHelper::presentInput("space", "Pladser", "number", $camp->space, $camp->space, "", "required");
@@ -52,11 +52,11 @@ switch(strtoupper($mode)){
             $camp->saveCamp([
                 filter_var($id, FILTER_SANITIZE_NUMBER_INT),
                 filter_var($_POST["title"], FILTER_SANITIZE_STRING),
-                filter_var($_POST["description"], FILTER_SANITIZE_STRING),
+                $_POST["description"],
                 filter_var($avatarName, FILTER_SANITIZE_STRING),
                 filter_var($_POST["space"], FILTER_SANITIZE_STRING)
             ]);
-            // echo '<script> location.replace("camps.php"); </script>';
+            echo '<script> location.replace("camps.php"); </script>';
         }
     } else {
         // insert
@@ -65,7 +65,7 @@ switch(strtoupper($mode)){
             empty($_FILES["img_path"]["name"]) ? $avatarName = "stock.jpg" : $avatarName = $camp->uploadCampImg($_FILES["avatar"]);
             $camp->createCamp([
                 filter_var($_POST["title"], FILTER_SANITIZE_STRING),
-                filter_var($_POST["description"], FILTER_SANITIZE_STRING),
+                $_POST["description"],
                 filter_var($_POST["author"], FILTER_SANITIZE_STRING),
                 filter_var($avatarName, FILTER_SANITIZE_STRING),
                 filter_var($_POST["photograph"], FILTER_SANITIZE_STRING),
@@ -79,7 +79,7 @@ switch(strtoupper($mode)){
         $camp = new Camp();
         $camp->deleteCamp($id);
     }
-    // echo '<script> location.replace("camps.php"); </script>';
+    echo '<script> location.replace("camps.php"); </script>';
 }
 
 ?>
@@ -89,5 +89,10 @@ switch(strtoupper($mode)){
         $(".delete").click(function () {
             return confirm("Vil du slette " + this.id + "?");
         });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#summernote').summernote();
     });
 </script>

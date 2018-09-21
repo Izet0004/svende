@@ -1,11 +1,19 @@
 <?php
 $pageTitle = "Program";
 require("assets/incl/header.php");
+$userEvent = new userprogram();
+if(isset($_GET["add_event"])){
+    $eventId = filter_var($_GET["add_event"], FILTER_SANITIZE_NUMBER_INT);
+    if(!$userEvent->getUserEventById($eventId, $auth->userId)){
+        $userEvent->addEvent($eventId, $auth->userId);
+    }
+}
 if(isset($_GET["day"])){
     $day = filter_var($_GET["day"], FILTER_SANITIZE_STRING);
 } else {
     $day = "Wednesday";
 }
+
 $event = new Event();
 $dateTime = new Date();
 $eventsFound = $event->getEventByDay($day);
@@ -60,15 +68,24 @@ foreach($eventsFound as $event){
                     <?php else: ?>
                     <?php foreach ($red as $event) : ?>
                     <tr>
+                        
+                        <?php
+                        // var_dump($userEvent->getUserEvent(232, $auth->userId));
+                        // var_dump($event['id']);?>
                         <th class="pad-sides vert-middle font-32" scope="row">
                             <?php echo $dateTime->convertToTime($event["date"])?>
                         </th>
                         <td class="full-width font-36">
                             <?php //var_dump($event["id"]);?>
-                            <a href="artistdetails.php?event_id=<?php echo $event['id']?>" class="a-remove-black">
+                            <a href="artistdetails.php?event_id=<?php echo $event['artist_id']?>" class="a-remove-black">
                                 <?php echo $event["name"]?><span class="font-14 block">
                                     <?php echo $event["scene_title"]?></span>
                             </a>
+                            <?php if($auth->isMember() || $auth->isAdmin() && !$userEvent->getUserEventById($event['id'], $auth->userId)): ?>
+                            <a href="program.php?add_event=<?php echo $event['id']?>" class="a-remove-black"><i class="material-icons">
+                                    add_box
+                                </i></a>
+                            <?php endif ;?>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -91,8 +108,16 @@ foreach($eventsFound as $event){
                         <td class="full-width font-36">
                             <a href="artistdetails.php?event_id=<?php echo $event['id']?>" class="a-remove-black">
                                 <?php echo $event["name"]?><span class="font-14 block">
-                                    <?php echo $event["scene_title"]?></span></td>
+                                    <?php echo $event["scene_title"]?></span>
+                                <?php if($auth->isMember() || $auth->isAdmin() && !$userEvent->getUserEventById($event['id'], $auth->userId)): ?>
+                                <a href="program.php?add_event=<?php echo $event['id']?>" class="a-remove-black"><i
+                                        class="material-icons">
+                                        add_box
+                                    </i></a>
+                                <?php endif ;?>
+                        </td>
                         </a>
+
                     </tr>
                     <?php endforeach; ?>
                     <?php endif; ?>
@@ -114,7 +139,14 @@ foreach($eventsFound as $event){
                         <td class="full-width font-36">
                             <a href="artistdetails.php?event_id=<?php echo $event['id']?>" class="a-remove-black">
                                 <?php echo $event["name"]?><span class="font-14 block">
-                                    <?php echo $event["scene_title"]?></span></td>
+                                    <?php echo $event["scene_title"]?></span>
+                                <?php if($auth->isMember() || $auth->isAdmin() && !$userEvent->getUserEventById($event['id'], $auth->userId)): ?>
+                                <a href="program.php?add_event=<?php echo $event['id']?>" class="a-remove-black"><i
+                                        class="material-icons">
+                                        add_box
+                                    </i></a>
+                                <?php endif ;?>
+                        </td>
                         </a>
                     </tr>
                     <?php endforeach; ?>
@@ -137,7 +169,14 @@ foreach($eventsFound as $event){
                         <td class="full-width font-36">
                             <a href="artistdetails.php?event_id=<?php echo $event['id']?>" class="a-remove-black">
                                 <?php echo $event["name"]?><span class="font-14 block">
-                                    <?php echo $event["scene_title"]?></span></td>
+                                    <?php echo $event["scene_title"]?></span>
+                                <?php if($auth->isMember() || $auth->isAdmin() && !$userEvent->getUserEventById($event['id'], $auth->userId)): ?>
+                                <a href="program.php?add_event=<?php echo $event['id']?>" class="a-remove-black"><i
+                                        class="material-icons">
+                                        add_box
+                                    </i></a>
+                                <?php endif ;?>
+                        </td>
                         </a>
                     </tr>
                     <?php endforeach; ?>

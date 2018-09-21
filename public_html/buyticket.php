@@ -1,4 +1,5 @@
 <?php
+$pageTitle = "Køb Billet";
 require("assets/incl/header.php");
 ?>
 <div class="container-fluid">
@@ -111,11 +112,11 @@ require("assets/incl/header.php");
             <div class="form-group input-split">
                 <div>
                     <label for="zip">Post nr:</label>
-                    <input type="number" class="form-control" name="zip" id="zip" aria-describedby="helpId" placeholder="Indtast dit Post nr">
+                    <input type="number" class="form-control" name="zip" id="zipInput" aria-describedby="helpId" placeholder="Indtast dit Post nr">
                 </div>
                 <div>
                     <label for="city">By</label>
-                    <input type="text" class="form-control" name="city" id="city" aria-describedby="helpId" disabled
+                    <input type="text" class="form-control" name="city" id="cityOutput" aria-describedby="helpId" value="" disabled
                         placeholder="By:">
                 </div>
             </div>
@@ -147,4 +148,8 @@ require("assets/incl/header.php");
         </div>
     </form>
 </div>
+<script src="assets/js/zip.js"></script>
+<script>
+    let zipper = new Zipper("zipInput", "cityOutput");
+</script>
 <?php require("assets/incl/footer.php")?>

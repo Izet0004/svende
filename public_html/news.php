@@ -1,4 +1,5 @@
 <?php
+$pageTitle = "Nyheder";
 require("assets/incl/header.php");
 $newsObj = new News();
 
